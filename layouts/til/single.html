@@ -1,0 +1,78 @@
+{{ define "main" }}
+
+<!-- Custom style for navbar color -->
+<style>
+  .navigation {
+    background-color: #41228e;
+  }
+</style>
+
+<!-- TIL single page -->
+<section class="section til-single-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <article class="til-single">
+          <!-- Header -->
+          <div class="til-single-header" style="background-color: {{ index (slice "#fdb15733" "#9473e633" "#bdecf633" "#ffbcaa33") (mod .Date.Day 4) }}">
+            <div class="til-single-meta">
+              <div class="til-single-date">
+                <span class="day">{{ .Date.Format "02" }}</span>
+                <span class="month">{{ .Date.Format "Jan" }}</span>
+                <span class="year">{{ .Date.Format "2006" }}</span>
+              </div>
+              <div class="til-single-categories">
+                {{ range .Params.categories }}
+                <a href="{{ "categories/" | relLangURL }}{{ . | urlize }}" class="til-category" style="background-color: {{ index (slice "#fdb157" "#9473e6" "#bdecf6" "#ffbcaa") (mod (len .) 4) }}">
+                  {{ . }}
+                </a>
+                {{ end }}
+              </div>
+            </div>
+            <h1 class="til-single-title">{{ .Title }}</h1>
+          </div>
+
+          <!-- Content -->
+          <div class="til-single-content">
+            {{ .Content }}
+          </div>
+
+          <!-- Footer -->
+          <div class="til-single-footer">
+            <div class="til-single-tags">
+              <h4>Tags:</h4>
+              <div class="tags-wrapper">
+                {{ range .Params.tags }}
+                <a href="{{ "tags/" | relLangURL }}{{ . | urlize }}" class="til-tag">{{ . }}</a>
+                {{ end }}
+              </div>
+            </div>
+
+            <div class="til-navigation">
+              <div class="row">
+                <div class="col-6">
+                  {{ with .PrevInSection }}
+                  <a href="{{ .Permalink }}" class="til-nav-link prev">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>{{ .Title | truncate 30 }}</span>
+                  </a>
+                  {{ end }}
+                </div>
+                <div class="col-6 text-end">
+                  {{ with .NextInSection }}
+                  <a href="{{ .Permalink }}" class="til-nav-link next">
+                    <span>{{ .Title | truncate 30 }}</span>
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                  {{ end }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}

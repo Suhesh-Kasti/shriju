@@ -1,0 +1,12 @@
+{{ $src := .Src }}
+{{ $class := .Class }}
+{{ $alt := .Alt | default "illustration" }}
+{{ $width := .Width | default "auto" }}
+{{ $height := .Height | default "auto" }}
+
+{{ if fileExists (add `assets/` $src) }}
+  {{ $image := resources.Get $src }}
+  <img src="{{ $image.RelPermalink }}" alt="{{ $alt }}" class="{{ $class }}" width="{{ $width }}" height="{{ $height }}" style="object-fit: contain; max-width: 100%;" loading="lazy">
+{{ else }}
+  <img src="{{ $src | relURL }}" alt="{{ $alt }}" class="{{ $class }}" width="{{ $width }}" height="{{ $height }}" style="object-fit: contain; max-width: 100%;" loading="lazy">
+{{ end }}

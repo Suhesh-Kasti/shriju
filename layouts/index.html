@@ -1,0 +1,452 @@
+{{ define "main" }}
+
+{{ with .Params.banner }}
+<!-- hero area -->
+<section class="hero-area bg-primary overflow-hidden" id="parallax">
+  <div class="container position-relative">
+    <div class="row align-items-center">
+      <div class="col-lg-8" data-aos="fade-up">
+        <h1 class="text-white font-secondary position-relative z-index-1">{{ .title | safeHTML }}</h1>
+
+        {{ if .subtitle.enable }}
+        <div class="typing-effect-container">
+          <span class="typing-prefix">I'm a </span>
+          <span id="typing-effect" class="typing-text" data-roles='{{ .subtitle.roles | jsonify }}'></span>
+          <span class="typing-cursor">|</span>
+        </div>
+        {{ end }}
+
+        <!-- CV button -->
+        <div class="cv-button-wrapper mt-4 mb-3">
+          <a href="{{ "assets/documents/" | relURL }}{{ site.Params.resume_file }}" download class="cv-button">
+            <span class="cv-button-text">View my CV</span>
+            <span class="cv-button-icon"><i class="ti-download"></i></span>
+          </a>
+        </div>
+
+        <!-- social icon -->
+        <ul class="social-icons-inline list-inline mt-3">
+          {{ range site.Params.social }}
+          <li class="list-inline-item"><a class="social-link" href="{{.link | safeURL }}"><i class="{{.icon}}"></i><span class="visually-hidden">{{.title}}</span></a></li>
+          {{ end }}
+        </ul>
+        <!-- /social icon -->
+      </div>
+
+    </div>
+    <!-- Large background text -->
+    <div class="bg-text-wrapper">
+      <div class="bg-text" data-depth="0.05">{{ .title | safeHTML }}</div>
+    </div>
+  </div>
+  {{ if site.Params.author_image_home }}
+  <div class="author-image-container" id="author-parallax">
+    <div class="layer" data-depth="0.1">
+      <img src="{{ site.Params.author_image_home | relURL }}" alt="{{ site.Params.author }}"
+           width="{{ site.Params.author_image_width }}" height="{{ site.Params.author_image_height }}"
+           class="author-image">
+    </div>
+  </div>
+  {{ end }}
+  <div class="hero-shapes">
+    <div class="layer-bg w-100">
+      {{ partial "image.html" (dict "Src" "images/illustrations/leaf-bg.png" "Alt" "bg-shape" "Class" `w-100`) }}
+    </div>
+    <div class="layer shape-layer shape-layer-1" id="l2">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/dots-cyan.svg" "Alt" "bg-shape" "Width" "80" "Height" "80") }}
+    </div>
+    <div class="layer shape-layer shape-layer-2" id="l3">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-orange.svg" "Alt" "bg-shape" "Width" "90" "Height" "90") }}
+    </div>
+    <div class="layer shape-layer shape-layer-3" id="l4">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/dots-orange.svg" "Alt" "bg-shape" "Width" "70" "Height" "70") }}
+    </div>
+    <div class="layer shape-layer shape-layer-4" id="l5">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-yellow.svg" "Alt" "bg-shape" "Width" "70" "Height" "70") }}
+    </div>
+    <div class="layer shape-layer shape-layer-5" id="l6">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-cyan.svg" "Alt" "bg-shape" "Width" "80" "Height" "80") }}
+    </div>
+    <div class="layer shape-layer shape-layer-6" id="l7">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/dots-group-orange.svg" "Alt" "bg-shape" "Width" "60" "Height" "60") }}
+    </div>
+    <div class="layer shape-layer shape-layer-7" id="l8">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-pink-round.svg" "Alt" "bg-shape" "Width" "100" "Height" "100") }}
+    </div>
+    <div class="layer shape-layer shape-layer-8" id="l9">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-cyan-2.svg" "Alt" "bg-shape" "Width" "120" "Height" "120") }}
+    </div>
+  </div>
+
+
+  <script>
+  $(document).ready(function() {
+    if (typeof Parallax !== 'undefined') {
+      // Initialize hero parallax
+      var heroParallax = document.getElementById('parallax');
+      if (heroParallax) {
+        try {
+          var heroParallaxInstance = new Parallax(heroParallax);
+        } catch (error) {
+          console.warn('Error initializing hero parallax:', error);
+        }
+      }
+
+      // Initialize author image parallax
+      var authorParallax = document.getElementById('author-parallax');
+      if (authorParallax) {
+        try {
+          var authorParallaxInstance = new Parallax(authorParallax);
+        } catch (error) {
+          console.warn('Error initializing author parallax:', error);
+        }
+      }
+    }
+
+    // Typing animation is now handled by typing-animation.js
+  });
+  </script>
+</section>
+<!-- /hero area -->
+{{ end }}
+
+{{ if .Params.about.enable }}
+<!-- about -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto text-center">
+        {{ with .Params.about }}
+        <p class="font-secondary lead text-dark">{{.content | markdownify}}</p>
+        {{ if .button.enable }}
+        {{ with .button }}
+        <a href="{{ .URL | absURL }}" class="btn btn-transparent">{{.label}}</a>
+        {{ end }}
+        {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /about -->
+{{ end }}
+
+{{ if .Params.skill.enable }}
+{{ with .Params.skill }}
+<!-- skills -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-title">{{ .title | markdownify }}</h2>
+      </div>
+      {{ range .item }}
+      <div class="col-lg-3 col-sm-6 mb-4">
+        <div class="card shadow text-center">
+          <div class="position-relative rounded-top progress-wrapper" style="background-color: {{.color}}; height: 130px; overflow: hidden;">
+            <div class="wave" style="bottom: {{.progress}}; position: absolute; width: 100%; height: 100%;"></div>
+          </div>
+          <div class="card-footer bg-white p-4">
+            <h3 class="h5 card-title m-0">{{.title }} ({{.progress}})</h3>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+<!-- /skills -->
+<script>
+  // Ensure wave animations work correctly
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set position for wave elements based on progress attribute
+    var waveElements = document.querySelectorAll('.wave');
+    for (var i = 0; i < waveElements.length; i++) {
+      var element = waveElements[i];
+
+      // Add the before and after pseudo-elements dynamically
+      var style = document.createElement('style');
+      style.textContent = `
+        @keyframes rotate {
+          50% {
+            transform: translateX(-50%) rotate(180deg);
+          }
+          100% {
+            transform: translateX(-50%) rotate(360deg);
+          }
+        }
+
+        .wave-${i}::before, .wave-${i}::after {
+          content: "";
+          position: absolute;
+          width: 800px;
+          height: 800px;
+          bottom: 0;
+          left: 50%;
+          background-color: rgba(255, 255, 255, .4);
+          border-radius: 45%;
+          transform: translateX(-50%) rotate(0);
+          animation: rotate 6s linear infinite;
+          z-index: 10;
+        }
+
+        .wave-${i}::after {
+          border-radius: 47%;
+          background-color: rgba(255, 255, 255, .9);
+          transform: translateX(-50%) rotate(0);
+          animation: rotate 10s linear -5s infinite;
+          z-index: 20;
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Add the class to the element
+      element.classList.add(`wave-${i}`);
+    }
+  });
+</script>
+{{ end }}
+{{ end }}
+
+{{ if .Params.experience.enable }}
+{{ with .Params.experience }}
+<!-- experience -->
+<section class="section position-relative elegant-experience-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center" data-aos="fade-up">
+        <h2 class="section-title">{{ .title | markdownify }}</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="elegant-timeline">
+          {{ range $index, $element := .item }}
+          <div class="timeline-item" data-aos="fade-up" data-aos-delay="{{mul 100 $index}}">
+            <div class="timeline-duration timeline-duration-{{ if eq (mod $index 2) 0 }}left{{ else }}right{{ end }}" style="background-color: {{ index (slice "#fdb157" "#9473e6" "#bdecf6" "#ffbcaa") (mod $index 4) }}">
+              <span>{{$element.duration}}</span>
+            </div>
+            <div class="timeline-marker">
+              {{ partial "image.html" (dict "Src" $element.logo "Alt" "company logo") }}
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3 class="timeline-title">{{$element.title }}</h3>
+              </div>
+              <div class="timeline-company">
+                <span>{{$element.company }}</span>
+              </div>
+            </div>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Decorative elements -->
+  <div class="decorative-line"></div>
+  <div class="decorative-circles">
+    <div class="circle circle-1" style="background-color: #fdb15733"></div>
+    <div class="circle circle-2" style="background-color: #9473e633"></div>
+    <div class="circle circle-3" style="background-color: #bdecf633"></div>
+  </div>
+</section>
+<!-- /experience -->
+{{ end }}
+{{ end }}
+
+{{ if .Params.education.enable }}
+{{ with .Params.education }}
+<!-- education -->
+<section class="section position-relative education-section">
+  <!-- SVG Bubble Animations -->
+  <div class="education-bubbles">
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
+    <div class="bubble bubble-4"></div>
+    <div class="bubble bubble-5"></div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center" data-aos="fade-up">
+        <h2 class="section-title">{{ .title | markdownify }}</h2>
+      </div>
+    </div>
+    <div class="row education-cards">
+      {{ range $index, $element := .item }}
+      <div class="col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{mul 100 $index}}">
+        <div class="education-card">
+          <div class="education-card-header" style="background-color: {{ index (slice "#fdb157" "#9473e6" "#bdecf6" "#ffbcaa") (mod $index 4) }}">
+            <div class="education-year">
+              <span>{{$element.year}}</span>
+            </div>
+            <div class="education-icon">
+              {{ if eq (mod $index 4) 0 }}
+              <i class="fas fa-graduation-cap education-icon-animate"></i>
+              {{ else if eq (mod $index 4) 1 }}
+              <i class="fas fa-book education-icon-animate"></i>
+              {{ else if eq (mod $index 4) 2 }}
+              <i class="fas fa-university education-icon-animate"></i>
+              {{ else }}
+              <i class="fas fa-award education-icon-animate"></i>
+              {{ end }}
+            </div>
+            <!-- Small decorative bubbles -->
+            <div class="card-bubble card-bubble-1"></div>
+            <div class="card-bubble card-bubble-2"></div>
+            <div class="card-bubble card-bubble-3"></div>
+          </div>
+          <div class="education-card-body">
+            <h3 class="education-title">{{ $element.title }}</h3>
+            <p class="education-academy">{{$element.academy}}</p>
+            <div class="education-decoration">
+              <svg width="80" height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 10C0 4.47715 4.47715 0 10 0H70C75.5228 0 80 4.47715 80 10V10C80 15.5228 75.5228 20 70 20H10C4.47715 20 0 15.5228 0 10V10Z" fill="{{ index (slice "#fdb15733" "#9473e633" "#bdecf633" "#ffbcaa33") (mod $index 4) }}"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+  <!-- bg image -->
+  {{ partial "image.html" (dict "Src" "images/backgrounds/education-bg.png" "Alt" "bg-image" "Class" `edu-bg-image
+  w-100`) }}
+</section>
+<!-- /education -->
+{{ end }}
+{{ end }}
+
+
+{{ if .Params.service.enable }}
+{{ with .Params.service }}
+<!-- services -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center" data-aos="fade-up">
+        <h2 class="section-title">{{ .title | markdownify }}</h2>
+      </div>
+      {{ range $index, $element := .item }}
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="{{mul 100 $index}}">
+        <div class="card {{if $element.highlighted }} active-bg-primary {{end}} hover-shadow shadow">
+          <div class="card-body text-center px-4 py-5">
+            <i class="{{$element.icon }} icon mb-5 d-inline-block"></i>
+            <h3 class="h5 mb-4">{{$element.title}}</h3>
+            <p>{{$element.content | markdownify}}</p>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+<!-- /services -->
+{{ end }}
+{{ end }}
+
+
+{{ if .Params.portfolio.enable }}
+<!-- portfolio -->
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center" data-aos="fade-up">
+        <h2 class="section-title">{{ .Params.portfolio.title | markdownify }}</h2>
+      </div>
+    </div>
+    <div class="row shuffle-wrapper">
+      {{ $item:= .Params.portfolio.item_show }}
+      {{ range $index, $element := first $item (where .Site.RegularPages "Section" "portfolio") }}
+      <div class="col-lg-4 col-md-6 col-sm-6 mb-4 shuffle-item">
+        <div class="position-relative rounded hover-wrapper">
+          {{ partial "image.html" (dict "Src" $element.Params.image "Alt" "portfolio-image" "Class" `rounded w-100 d-block`)
+          }}
+          <div class="hover-overlay">
+            <div class="hover-content">
+              <a class="btn btn-light btn-sm" href="{{ $element.Permalink | safeURL }}">view project</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+<!-- /portfolio -->
+{{ end }}
+
+
+{{ if .Params.testimonial.enable }}
+{{ with .Params.testimonial }}
+<!-- testimonial -->
+<section class="section bg-primary position-relative testimonial-bg-shapes">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center" data-aos="fade-up">
+        <h2 class="section-title text-white mb-5">{{ .title | markdownify }}</h2>
+      </div>
+      <div class="col-lg-10 mx-auto swiper testimonial-slider">
+        <div class="swiper-wrapper">
+          {{ range .item }}
+          <div class="swiper-slide">
+            <div class="text-center testimonial-content">
+              <i class="ti-quote-right text-white icon mb-4 d-inline-block"></i>
+              <p class="text-white mb-4">{{.content | markdownify}}</p>
+              {{ partial "image.html" (dict "Src" .image "Alt" "client-image" "Class" `rounded-circle mb-4
+              d-inline-block`)
+              }}
+              <h3 class="h5 text-white">{{.name }}</h3>
+              <span class="fs-6 text-secondary d-block text-light mb-4 designation">{{ .designation }}</span>
+            </div>
+          </div>
+          {{ end }}
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </div>
+  <!-- bg shapes -->
+  {{ partial "image.html" (dict "Src" "images/backgrounds/map.png" "Alt" "map" "Class" `bg-map`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/dots-group-v.svg" "Alt" "map" "Class" `bg-shape-1`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/leaf-orange.svg" "Alt" "map" "Class" `bg-shape-2`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/dots-group-sm.svg" "Alt" "map" "Class" `bg-shape-3`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/leaf-pink-round.svg" "Alt" "map" "Class" `bg-shape-4`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/leaf-cyan.svg" "Alt" "map" "Class" `bg-shape-5`) }}
+</section>
+<!-- /testimonial -->
+{{ end }}
+{{ end }}
+
+
+{{ if .Params.clients_logo_slider.enable }}
+<!-- client logo slider -->
+<section class="section pb-0">
+  <div class="container">
+    {{ partial "components/client-slider.html" . }}
+  </div>
+</section>
+<!-- /client logo slider -->
+{{ end }}
+
+{{ if .Params.blog.enable }}
+<!-- blog -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center" data-aos="fade-up">
+        <h2 class="section-title">{{.Params.blog.title | markdownify }}</h2>
+      </div>
+      {{ range $index, $element := first 3 (where .Site.RegularPages "Section" "blog")}}
+      {{ $element.Render "post" }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+<!-- /blog -->
+{{ end }}
+
+
+{{ end }}

@@ -1,0 +1,27 @@
+############# English navigation ##############
+
+# main menu
+[[main]]
+URL = "about/"
+name = "About"
+weight = 1
+
+[[main]]
+URL = "til/"
+name = "❤️TIL❤️"
+weight = 2
+
+[[main]]
+URL = "blog/"
+name = "Blog"
+weight = 3
+
+[[main]]
+URL = "portfolio/"
+name = "Portfolio"
+weight = 4
+
+[[main]]
+URL = "contact/"
+name = "Contact"
+weight = 5

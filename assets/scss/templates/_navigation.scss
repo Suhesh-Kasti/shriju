@@ -1,0 +1,83 @@
+.navigation {
+  padding: 15px 30px;
+  transition: .3s ease;
+
+  &.nav-bg {
+    background-color: $color-primary;
+    padding: 8px 20px;
+
+    @include desktop {
+      padding: 5px 15px;
+    }
+  }
+
+  @include desktop {
+    padding: 10px;
+    background: $color-primary;
+  }
+
+  @include tablet {
+    padding: 8px;
+  }
+
+  @include mobile {
+    padding: 5px;
+  }
+}
+
+.navbar {
+  .nav-item {
+    a.nav-link {
+      font-family: $font-secondary;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 10px;
+      font-size: 0.9rem;
+
+      @include mobile {
+        padding: 8px;
+        font-size: 0.85rem;
+      }
+    }
+
+    &.active {
+      font-weight: bold;
+    }
+  }
+
+  &-toggler {
+    padding: 8px 14px;
+
+    &:active,
+    &:hover,
+    &:focus {
+      box-shadow: none;
+    }
+
+    i {
+      font-size: 18px;
+    }
+
+    .ti-close {
+      display: none;
+    }
+
+    &[aria-expanded="true"] {
+      .ti-menu {
+        display: none;
+      }
+
+      .ti-close {
+        display: block;
+      }
+    }
+  }
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: $white;
+
+  &:hover {
+    color: rgba($white, 0.7);
+  }
+}

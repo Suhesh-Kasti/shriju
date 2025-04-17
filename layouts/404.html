@@ -1,0 +1,60 @@
+{{ define "main" }}
+
+<section class="page-404 section bg-primary position-relative overflow-hidden">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <div class="error-content text-center" data-aos="fade-up">
+          <div class="error-character">
+            <div class="error-face">
+              <div class="error-eyes">
+                <div class="error-eye left"></div>
+                <div class="error-eye right"></div>
+              </div>
+              <div class="error-mouth sad"></div>
+            </div>
+            <div class="error-number">404</div>
+            <div class="error-shadow"></div>
+          </div>
+          <h2 class="mb-4 text-white">Oops! Page Not Found</h2>
+          <p class="mb-5 text-white">The page you're looking for seems to have gone on vacation. Maybe it's sipping cocktails on a beach somewhere?</p>
+          <div class="error-actions">
+            <a href="{{ site.BaseURL | relLangURL }}" class="btn btn-light"><i class="ti-home mr-2"></i>Go Home</a>
+            <a href="javascript:history.back()" class="btn btn-outline-light ml-3"><i class="ti-back-left mr-2"></i>Go Back</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating elements -->
+  <div class="error-floating-elements">
+    <div class="floating-element e1">❤️</div>
+    <div class="floating-element e2">🙈</div>
+    <div class="floating-element e3">🦄</div>
+    <div class="floating-element e4">🌈</div>
+    <div class="floating-element e5">🍦</div>
+    <div class="floating-element e6">🎈</div>
+  </div>
+
+  <!-- Decorative shapes -->
+  <div class="error-shapes">
+    <div class="error-shape s1">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-cyan.svg" "Alt" "shape" "Width" "100" "Height" "100") }}
+    </div>
+    <div class="error-shape s2">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/dots-group-orange.svg" "Alt" "shape" "Width" "80" "Height" "80") }}
+    </div>
+    <div class="error-shape s3">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-orange.svg" "Alt" "shape" "Width" "120" "Height" "120") }}
+    </div>
+    <div class="error-shape s4">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-pink-round.svg" "Alt" "shape" "Width" "90" "Height" "90") }}
+    </div>
+    <div class="error-shape s5">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/dots-cyan.svg" "Alt" "shape" "Width" "70" "Height" "70") }}
+    </div>
+  </div>
+</section>
+
+{{ end }}
