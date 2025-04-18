@@ -13,34 +13,32 @@ work_process:
   item:
   - title : "Research and Plan"
     icon : "images/icons/plan.png"
-    content : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    
+    content : "Every great design starts with a deep dive! I get to know you, your goals, and your vibe to map out the perfect creative game plan."
+
   - title : "Design and Develop"
     icon : "images/icons/design.png"
-    content : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    
+    content : "Here’s where the magic happens ✨ I sketch, mock, and pixel-push until your design is looking drop-dead gorgeous and totally *you*."
+
   - title : "Deliver"
     icon : "images/icons/print.png"
-    content : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-
+    content : "Ta-da! I hand off everything you need, all polished and ready to shine — with a little bow on top (figuratively... but maybe literally too)."
 
 # team
 team:
   enable: true
   title : "My Team"
   team_member:
-    - title : "Jack Schenziwe"
-      image : "images/team/member-1.png"
-      designation : "Project Manager"
+    - title : "Shushant Khatiwada"
+      image : "images/team/sushant.jpg"
+      designation : "Wordpress Developer"
       
-    - title : "Julias Carlie"
-      image : "images/team/member-2.png"
-      designation : "Web Developer"
+    - title : "Shriya Bayalkoti"
+      image : "images/team/shriya.jpg"
+      designation : "Network Engineer"
       
-    - title : "John Doe"
-      image : "images/team/member-3.png"
-      designation : "Designer"
-
+    - title : "Sami Bista"
+      image : "images/team/sami.jpg"
+      designation : "Product Manager"
 
 # client logo slider
 clients_logo_slider:
@@ -49,8 +47,9 @@ clients_logo_slider:
   # clients logo comes from 'params.toml' file
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Oh hey, you found me! 👀✨
+I’m Shrijana — graphic designer, color enthusiast, and unofficial queen of “bholi bata sure padne” 💅🎨 I specialize in making brands look so cute they’ll make your ex jealous and your grandma proud. From logos that sparkle (figuratively... usually) to banners that slay, I’m here to bring your dream aesthetic to life.
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+When not glued to my screen, I'm probably pushing pixels around, you’ll find me fighting with my buddies ([Shriya](https://shriyana.pages.dev/) and [Sami](https://sami.pages.dev/)), preventing my icecream from melting off using my tongue 👅, and asking my plants for design advice (they’re very supportive 🌿).
 
-Deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia.
+Let’s make magic together — cute, quirky, totally-you kind of magic. 💖✨

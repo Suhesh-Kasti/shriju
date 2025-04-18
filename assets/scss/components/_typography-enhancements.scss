@@ -1,0 +1,284 @@
+// Typography Enhancements
+// This file ensures consistent typography and beautiful link hover animations across all pages
+
+// Base Typography
+body {
+  font-family: $font-primary;
+  font-weight: 400;
+  line-height: 1.7;
+  color: $text-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+// Headings
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: $font-secondary;
+  font-weight: 700;
+  line-height: 1.2;
+  color: $text-dark;
+  letter-spacing: -0.02em;
+}
+
+h1, .h1 {
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+h2, .h2 {
+  font-weight: 800;
+}
+
+// Paragraph
+p {
+  margin-bottom: 1.5rem;
+}
+
+// Links with beautiful hover animation
+a {
+  color: $text-dark;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+
+  &:not(.btn):not(.nav-link):not(.dropdown-item):not([class*="card"]):not(.tag):not(.blog-nav-link):not(.recent-post-title):not(.gallery-zoom):not(.glightbox):not(.social-icon):not(.navbar-brand):not(.footer-link):not(.widget-title):not(.toc-toggle) {
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(to right, $color-primary, $color-secondary);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      color: $color-primary;
+
+      &::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+    }
+  }
+
+  // Special hover effect for navigation links
+  &.nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(to right, $color-primary, $color-secondary);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover, &.active {
+      color: $white;
+
+      &::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+    }
+  }
+
+  // Button hover effect
+  &.btn {
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+// Font weights
+.font-weight-light {
+  font-weight: 300 !important;
+}
+
+.font-weight-normal {
+  font-weight: 400 !important;
+}
+
+.font-weight-medium {
+  font-weight: 500 !important;
+}
+
+.font-weight-semibold {
+  font-weight: 600 !important;
+}
+
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+
+.font-weight-extrabold {
+  font-weight: 800 !important;
+}
+
+.font-weight-black {
+  font-weight: 900 !important;
+}
+
+// Font families
+.font-primary {
+  font-family: $font-primary !important;
+}
+
+.font-secondary {
+  font-family: $font-secondary !important;
+}
+
+// Text colors
+.text-primary {
+  color: $color-primary !important;
+}
+
+.text-secondary {
+  color: $color-secondary !important;
+}
+
+.text-dark {
+  color: $text-dark !important;
+}
+
+.text-light {
+  color: $text-light !important;
+}
+
+// Ensure consistent font sizes across all pages
+.lead {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+// Card title consistency
+.card-title {
+  font-family: $font-secondary;
+  font-weight: 700;
+}
+
+// Blog content typography
+.blog-content .content {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $font-secondary;
+  }
+
+  p, ul, ol, blockquote {
+    font-family: $font-primary;
+  }
+}
+
+// Table of contents typography
+.toc-container {
+  .toc-header h4 {
+    font-family: $font-secondary;
+  }
+
+  .toc-body {
+    font-family: $font-primary;
+  }
+}
+
+// Gallery typography
+.gallery-section {
+  .gallery-card {
+    .gallery-overlay-content {
+      font-family: $font-secondary;
+    }
+  }
+}
+
+// Ensure consistent typography in all components
+.section-title {
+  font-family: $font-secondary;
+  font-weight: 800;
+}
+
+.widget-title {
+  font-family: $font-secondary;
+  font-weight: 700;
+}
+
+// Responsive typography
+@include desktop {
+  h1, .h1 {
+    font-size: 2.5rem;
+  }
+
+  h2, .h2 {
+    font-size: 2rem;
+  }
+
+  h3, .h3 {
+    font-size: 1.75rem;
+  }
+
+  h4, .h4 {
+    font-size: 1.5rem;
+  }
+
+  .lead {
+    font-size: 1.15rem;
+  }
+}
+
+@include tablet {
+  h1, .h1 {
+    font-size: 2.25rem;
+  }
+
+  h2, .h2 {
+    font-size: 1.75rem;
+  }
+
+  h3, .h3 {
+    font-size: 1.5rem;
+  }
+
+  h4, .h4 {
+    font-size: 1.25rem;
+  }
+
+  .lead {
+    font-size: 1.1rem;
+  }
+}
+
+@include mobile {
+  h1, .h1 {
+    font-size: 2rem;
+  }
+
+  h2, .h2 {
+    font-size: 1.5rem;
+  }
+
+  h3, .h3 {
+    font-size: 1.25rem;
+  }
+
+  h4, .h4 {
+    font-size: 1.1rem;
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+}

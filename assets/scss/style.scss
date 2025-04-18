@@ -27,6 +27,8 @@ $font-icon: '{{.font_icon | default "Font Awesome 5 Free"}}';
 
 @import "typography";
 
+@import "components/typography-enhancements";
+
 @import "buttons";
 
 @import "common";

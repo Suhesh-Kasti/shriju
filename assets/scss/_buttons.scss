@@ -9,7 +9,8 @@
   border: 0;
   position: relative;
   z-index: 1;
-  transition: .2s ease;
+  transition: all 0.3s ease;
+  overflow: hidden;
 
   &:focus {
     outline: 0;
@@ -41,6 +42,8 @@
 
   &:hover {
     background: lighten($color: $color-primary, $amount: 10) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   }
 
   &.focus,
@@ -56,11 +59,16 @@
   color: $white;
 
   &:active,
-  &:hover,
   &.focus,
   &.active {
     box-shadow: none !important;
     background: lighten($color: $color-primary, $amount: 10) !important;
+  }
+
+  &:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    background: lighten($color: $color-primary, $amount: 10) !important;
+    transform: translateY(-3px);
   }
 }
 
@@ -69,8 +77,12 @@
   color: $color-primary;
   font-weight: bold;
 
-  &:active,
-  &:hover {
+  &:active {
     color: $color-primary;
+  }
+
+  &:hover {
+    color: darken($color: $color-primary, $amount: 10);
+    transform: translateY(-3px);
   }
 }
