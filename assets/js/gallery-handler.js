@@ -8,21 +8,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Colors for gallery items
     const colors = ['#fdb157', '#9473e6', '#bdecf6', '#ffbcaa', '#fb839e', '#56deb8'];
 
-    // Fetch the list of images from the gallery folder
-    fetch('/api/gallery-images/index.json')
-      .then(response => {
-        if (!response.ok) {
-          console.warn('Dynamic API endpoint not available, falling back to static JSON file');
-          return fetch('/api/gallery-images.json');
-        }
-        return response;
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
+    // Create a direct array of images from the gallery folder
+    // This is a more reliable approach than using the API
+    const galleryImages = [
+      { src: '/images/gallery/1.jpg', alt: 'Gallery Image 1' },
+      { src: '/images/gallery/2.jpg', alt: 'Gallery Image 2' },
+      { src: '/images/gallery/3.jpg', alt: 'Gallery Image 3' },
+      { src: '/images/gallery/4.jpg', alt: 'Gallery Image 4' },
+      { src: '/images/gallery/5.jpg', alt: 'Gallery Image 5' },
+      { src: '/images/gallery/6.jpg', alt: 'Gallery Image 6' },
+      { src: '/images/gallery/7.jpg', alt: 'Gallery Image 7' },
+      { src: '/images/gallery/8.jpg', alt: 'Gallery Image 8' },
+      { src: '/images/gallery/9.jpg', alt: 'Gallery Image 9' },
+      { src: '/images/gallery/10.jpg', alt: 'Gallery Image 10' }
+    ];
+
+    // Use the direct array instead of fetching
+    Promise.resolve(galleryImages)
       .then(images => {
         if (images && images.length > 0) {
           let galleryHTML = '';
@@ -36,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="gallery-card" style="--card-color: ${color}">
                   <div class="gallery-image-wrapper">
                     <a href="${image.src}" class="glightbox" data-gallery="gallery">
-                      <img src="${image.webp || image.src}"
+                      <img src="${image.src}"
                            alt="${image.alt || 'Gallery image'}"
                            class="img-fluid gallery-image"
                            loading="lazy">
@@ -57,38 +59,30 @@ document.addEventListener('DOMContentLoaded', function() {
           galleryContainer.innerHTML = galleryHTML;
 
           // Initialize lightbox for gallery images if GLightbox is available
-          if (typeof GLightbox !== 'undefined') {
-            GLightbox({
-              selector: '.glightbox',
-              touchNavigation: true,
-              loop: true,
-              openEffect: 'zoom',
-              closeEffect: 'fade',
-              cssEfects: {
-                zoom: { in: 'zoomIn', out: 'zoomOut' },
-                fade: { in: 'fadeIn', out: 'fadeOut' }
-              },
-              preload: true
-            });
-          }
+          setTimeout(() => {
+            if (typeof GLightbox !== 'undefined') {
+              const lightbox = GLightbox({
+                selector: '.glightbox',
+                touchNavigation: true,
+                loop: true,
+                openEffect: 'zoom',
+                closeEffect: 'fade',
+                cssEfects: {
+                  zoom: { in: 'zoomIn', out: 'zoomOut' },
+                  fade: { in: 'fadeIn', out: 'fadeOut' }
+                },
+                preload: true
+              });
 
-          // Add hover animations to gallery items
-          const galleryItems = document.querySelectorAll('.gallery-item');
-          galleryItems.forEach(item => {
-            item.addEventListener('mouseenter', function() {
-              const image = this.querySelector('.gallery-image');
-              if (image) {
-                image.style.transform = 'scale(1.05)';
-              }
-            });
+              console.log('GLightbox initialized:', lightbox);
+            } else {
+              console.warn('GLightbox is not available');
+            }
+          }, 500); // Small delay to ensure DOM is fully ready
 
-            item.addEventListener('mouseleave', function() {
-              const image = this.querySelector('.gallery-image');
-              if (image) {
-                image.style.transform = 'scale(1)';
-              }
-            });
-          });
+          // Initialize hover effects
+          // We'll use CSS for the hover effects instead of JavaScript
+          // This is more reliable and performs better
         } else {
           galleryContainer.innerHTML = '<div class="col-12 text-center"><p>No images found in the gallery. Please add some images to the static/images/gallery folder.</p></div>';
         }
