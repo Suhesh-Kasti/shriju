@@ -4,8 +4,8 @@
       {{ partial "image.html" (dict "Src" .Params.Image "Alt" .Title) }}
     </a>
     <div class="card-body p-4">
-      <h3 class="h4 card-title mb-2"><a class="text-dark" href="{{.Permalink}}">{{.Title }}</a></h3>
-      <p class="card-text mb-3">{{ .Summary | truncate 120 }}</p>
+      <h3 class="h4 card-title mb-0"><a class="text-dark" href="{{.Permalink}}">{{.Title }}</a></h3>
+      <p class="card-text mt-1 mb-3">{{ .Summary | truncate 120 }}</p>
       <a href="{{.Permalink}}" class="btn btn-sm btn-primary">Read More <span class="visually-hidden">Details</span></a>
     </div>
   </article>

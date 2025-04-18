@@ -25,6 +25,11 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
     /visible/,
     /current/,
     /active/,
+    /^gallery-/,
+    /^gslide/,
+    /^goverlay/,
+    /^gbtn/,
+    /^gloader/,
   ],
 });
 

@@ -22,6 +22,11 @@ name = "Portfolio"
 weight = 4
 
 [[main]]
+URL = "gallery/"
+name = "Gallery"
+weight = 5
+
+[[main]]
 URL = "contact/"
 name = "Contact"
-weight = 5
+weight = 6

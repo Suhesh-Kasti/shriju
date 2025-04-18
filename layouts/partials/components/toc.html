@@ -1,0 +1,13 @@
+{{ if and (gt .WordCount 400) (.TableOfContents) }}
+<div class="toc-container" data-aos="fade-up">
+  <div class="toc-header">
+    <h4><i class="ti-list"></i>Table of Contents</h4>
+    <button class="toc-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#tocCollapse" aria-expanded="true" aria-controls="tocCollapse">
+      <i class="ti-angle-up"></i>
+    </button>
+  </div>
+  <div class="toc-body collapse show" id="tocCollapse">
+    {{ .TableOfContents }}
+  </div>
+</div>
+{{ end }}

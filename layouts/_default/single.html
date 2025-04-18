@@ -2,20 +2,111 @@
 
   {{ partial "components/modern-page-title.html" . }}
 
-  <section class="section">
+  <section class="section blog-single-section">
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-lg-9 text-center mb-4">
-          {{ partial "image.html" (dict "Src" .Params.image "Alt" .Title "Class" `rounded mb-4`) }}
-          <p class="fw-bold font-secondary">Published on {{ .PublishDate.Format "Jan 02, 2006" }} by <span class="text-primary">{{site.Params.Author}}</span></p>
+        <div class="col-lg-10 text-center mb-5" data-aos="fade-up">
+          {{ partial "image.html" (dict "Src" .Params.image "Alt" .Title "Class" `rounded blog-featured-image mb-4`) }}
+          <div class="blog-meta">
+            <span class="blog-date"><i class="ti-calendar"></i> {{ .PublishDate.Format "Jan 02, 2006" }}</span>
+            <span class="blog-author"><i class="ti-user"></i> {{site.Params.Author}}</span>
+            {{ if .Params.categories }}
+            <span class="blog-categories">
+              <i class="ti-folder"></i>
+              {{ range $index, $category := .Params.categories }}
+                {{ if gt $index 0 }}, {{ end }}
+                <a href="{{ `categories/` | relLangURL }}{{ . | urlize }}/">{{ . }}</a>
+              {{ end }}
+            </span>
+            {{ end }}
+          </div>
         </div>
-        <div class="col-lg-9">
-          <div class="content">
-            {{.Content }}
+
+        <div class="col-lg-8 order-lg-2">
+          <div class="blog-content" data-aos="fade-up" data-aos-delay="100">
+            {{ partial "components/toc.html" . }}
+            <div class="content">
+              {{.Content }}
+            </div>
+          </div>
+
+          {{ if .Params.tags }}
+          <div class="blog-tags mt-5" data-aos="fade-up">
+            <h4 class="mb-3">Tags</h4>
+            <div class="tags">
+              {{ range .Params.tags }}
+              <a href="{{ `tags/` | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
+              {{ end }}
+            </div>
+          </div>
+          {{ end }}
+
+          <div class="blog-navigation mt-5" data-aos="fade-up">
+            <div class="row">
+              <div class="col-6">
+                {{ with .PrevInSection }}
+                <a href="{{ .Permalink }}" class="blog-nav-link prev">
+                  <span class="nav-direction"><i class="ti-arrow-left"></i> Previous</span>
+                  <span class="nav-title">{{ .Title | truncate 30 }}</span>
+                </a>
+                {{ end }}
+              </div>
+              <div class="col-6 text-end">
+                {{ with .NextInSection }}
+                <a href="{{ .Permalink }}" class="blog-nav-link next">
+                  <span class="nav-direction">Next <i class="ti-arrow-right"></i></span>
+                  <span class="nav-title">{{ .Title | truncate 30 }}</span>
+                </a>
+                {{ end }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 order-lg-1">
+          <div class="blog-sidebar" data-aos="fade-up">
+            <div class="sidebar-widget search-widget">
+              <h4 class="widget-title">Search</h4>
+              <form action="{{ "search" | absURL }}" class="search-form">
+                <input type="search" name="q" id="search-query" placeholder="Type & Hit Enter...">
+                <button type="submit"><i class="ti-search"></i></button>
+              </form>
+            </div>
+
+            <div class="sidebar-widget recent-posts-widget">
+              <h4 class="widget-title">Recent Posts</h4>
+              <div class="recent-posts">
+                {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
+                <div class="recent-post-item">
+                  <a href="{{ .Permalink }}" class="recent-post-title">{{ .Title }}</a>
+                  <div class="recent-post-meta">
+                    <span><i class="ti-calendar"></i> {{ .PublishDate.Format "Jan 02, 2006" }}</span>
+                  </div>
+                </div>
+                {{ end }}
+              </div>
+            </div>
+
+            <div class="sidebar-widget categories-widget">
+              <h4 class="widget-title">Categories</h4>
+              <ul class="categories-list">
+                {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+                <li><a href="{{ "categories/" | relLangURL }}{{ $name | urlize }}/">{{ $name | title }} <span>({{ len $taxonomy }})</span></a></li>
+                {{ end }}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- bg shapes -->
+    {{ partial "image.html" (dict "Src" "images/backgrounds/map.png" "Alt" "map" "Class" `bg-map`) }}
+    {{ partial "image.html" (dict "Src" "images/illustrations/dots-group-v.svg" "Alt" "map" "Class" `bg-shape-1`) }}
+    {{ partial "image.html" (dict "Src" "images/illustrations/leaf-orange.svg" "Alt" "map" "Class" `bg-shape-2`) }}
+    {{ partial "image.html" (dict "Src" "images/illustrations/dots-group-sm.svg" "Alt" "map" "Class" `bg-shape-3`) }}
+    {{ partial "image.html" (dict "Src" "images/illustrations/leaf-pink-round.svg" "Alt" "map" "Class" `bg-shape-4`) }}
+    {{ partial "image.html" (dict "Src" "images/illustrations/leaf-cyan.svg" "Alt" "map" "Class" `bg-shape-5`) }}
   </section>
 
 {{ end }}

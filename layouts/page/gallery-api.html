@@ -1,0 +1,21 @@
+{{ define "main" }}
+{{ $galleryDir := "static/images/gallery/" }}
+{{ $files := readDir $galleryDir }}
+
+[
+  {{ range $index, $file := $files }}
+    {{ if ne $index 0 }},{{ end }}
+    {
+      "src": "/images/gallery/{{ $file.Name }}",
+      "alt": "{{ replace (replace $file.Name "." " ") (path.Ext $file.Name) "" | title }}",
+      {{ $webpPath := printf "/images/gallery/%s.webp" (replace $file.Name (path.Ext $file.Name) "") }}
+      {{ $webpExists := fileExists (printf "static%s" $webpPath) }}
+      {{ if $webpExists }}
+      "webp": "{{ $webpPath }}"
+      {{ else }}
+      "webp": ""
+      {{ end }}
+    }
+  {{ end }}
+]
+{{ end }}

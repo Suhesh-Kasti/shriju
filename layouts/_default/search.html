@@ -1,0 +1,210 @@
+{{ define "main" }}
+
+<section class="modern-page-title bg-primary position-relative overflow-hidden" id="parallax">
+  <div class="container position-relative" style="z-index: 10;">
+    <div class="row">
+      <div class="col-12 text-center" data-aos="fade-up">
+        <h1 class="text-white font-secondary position-relative z-index-1">Search Results</h1>
+        <p class="text-white lead position-relative z-index-1">Search results for: <span id="search-query-display"></span></p>
+      </div>
+    </div>
+    <!-- Large background text -->
+    <div class="bg-text-wrapper">
+      <div class="bg-text" data-depth="0.05">Search</div>
+    </div>
+  </div>
+
+  <!-- background shapes with parallax -->
+  <div class="hero-shapes" style="z-index: 1;">
+    <div class="layer-bg w-100">
+      {{ partial "image.html" (dict "Src" "images/illustrations/leaf-bg.png" "Alt" "bg-shape" "Class" `w-100`) }}
+    </div>
+    <div class="layer shape-layer shape-layer-1" id="l2">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/dots-cyan.svg" "Alt" "bg-shape" "Width" "80" "Height" "80") }}
+    </div>
+    <div class="layer shape-layer shape-layer-2" id="l3">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-orange.svg" "Alt" "bg-shape" "Width" "90" "Height" "90") }}
+    </div>
+    <div class="layer shape-layer shape-layer-3" id="l4">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/dots-orange.svg" "Alt" "bg-shape" "Width" "70" "Height" "70") }}
+    </div>
+    <div class="layer shape-layer shape-layer-4" id="l5">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-pink.svg" "Alt" "bg-shape" "Width" "60" "Height" "60") }}
+    </div>
+    <div class="layer shape-layer shape-layer-5" id="l6">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-cyan.svg" "Alt" "bg-shape" "Width" "80" "Height" "80") }}
+    </div>
+    <div class="layer shape-layer shape-layer-6" id="l7">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/dots-group-orange.svg" "Alt" "bg-shape" "Width" "100" "Height" "100") }}
+    </div>
+    <div class="layer shape-layer shape-layer-7" id="l8">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-pink-round.svg" "Alt" "bg-shape" "Width" "70" "Height" "70") }}
+    </div>
+    <div class="layer shape-layer shape-layer-8" id="l9">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-cyan-2.svg" "Alt" "bg-shape" "Width" "120" "Height" "120") }}
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Parallax !== 'undefined') {
+      // Initialize hero parallax
+      var heroParallax = document.getElementById('parallax');
+      if (heroParallax) {
+        try {
+          var heroParallaxInstance = new Parallax(heroParallax, {
+            relativeInput: true,
+            hoverOnly: false,
+            calibrateX: true,
+            calibrateY: true
+          });
+        } catch (error) {
+          console.warn('Error initializing hero parallax:', error);
+        }
+      }
+    }
+    
+    // Display search query
+    var urlParams = new URLSearchParams(window.location.search);
+    var searchQuery = urlParams.get('q');
+    if (searchQuery) {
+      document.getElementById('search-query-display').textContent = '"' + searchQuery + '"';
+    }
+  });
+  </script>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="search-results" id="search-results">
+          <div class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3">Searching...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- bg shapes -->
+  {{ partial "image.html" (dict "Src" "images/backgrounds/map.png" "Alt" "map" "Class" `bg-map`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/dots-group-v.svg" "Alt" "map" "Class" `bg-shape-1`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/leaf-orange.svg" "Alt" "map" "Class" `bg-shape-2`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/dots-group-sm.svg" "Alt" "map" "Class" `bg-shape-3`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/leaf-pink-round.svg" "Alt" "map" "Class" `bg-shape-4`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/leaf-cyan.svg" "Alt" "map" "Class" `bg-shape-5`) }}
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var urlParams = new URLSearchParams(window.location.search);
+  var searchQuery = urlParams.get('q');
+  var searchResults = document.getElementById('search-results');
+  
+  if (!searchQuery) {
+    searchResults.innerHTML = '<div class="text-center"><p>No search query provided. Please enter a search term.</p></div>';
+    return;
+  }
+  
+  // Simulate search results (in a real implementation, you would use a search API)
+  setTimeout(function() {
+    var results = [];
+    
+    // Loop through all pages to find matches (this is a simplified example)
+    {{ range where .Site.RegularPages "Section" "blog" }}
+    if ("{{ .Title | lower }}".includes(searchQuery.toLowerCase()) || 
+        "{{ .Content | plainify | lower }}".includes(searchQuery.toLowerCase())) {
+      results.push({
+        title: "{{ .Title }}",
+        url: "{{ .Permalink }}",
+        date: "{{ .Date.Format "Jan 02, 2006" }}",
+        summary: "{{ .Summary | plainify | truncate 150 }}"
+      });
+    }
+    {{ end }}
+    
+    if (results.length > 0) {
+      var resultsHTML = '<div class="search-results-count mb-4">' + results.length + ' results found</div>';
+      
+      results.forEach(function(result) {
+        resultsHTML += '<div class="search-result-item" data-aos="fade-up">' +
+          '<h3><a href="' + result.url + '">' + result.title + '</a></h3>' +
+          '<div class="search-result-meta"><i class="ti-calendar"></i> ' + result.date + '</div>' +
+          '<p class="search-result-summary">' + result.summary + '</p>' +
+          '<a href="' + result.url + '" class="btn btn-sm btn-primary">Read More</a>' +
+          '</div>';
+      });
+      
+      searchResults.innerHTML = resultsHTML;
+      
+      // Initialize AOS
+      if (typeof AOS !== 'undefined') {
+        AOS.refresh();
+      }
+    } else {
+      searchResults.innerHTML = '<div class="text-center">' +
+        '<p>No results found for "' + searchQuery + '".</p>' +
+        '<p>Try different keywords or check your spelling.</p>' +
+        '</div>';
+    }
+  }, 1000); // Simulate loading delay
+});
+</script>
+
+<style>
+.search-result-item {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.search-result-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-item h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.search-result-item h3 a {
+  color: #222;
+  transition: all 0.3s ease;
+}
+
+.search-result-item h3 a:hover {
+  color: #41228e;
+}
+
+.search-result-meta {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 15px;
+}
+
+.search-result-meta i {
+  margin-right: 5px;
+  color: #41228e;
+}
+
+.search-result-summary {
+  margin-bottom: 15px;
+  color: #4c4c4c;
+}
+
+.search-results-count {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #41228e;
+}
+</style>
+
+{{ end }}

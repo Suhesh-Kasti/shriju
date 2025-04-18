@@ -39,4 +39,10 @@ $font-icon: '{{.font_icon | default "Font Awesome 5 Free"}}';
 
 @import "components/wave";
 
+@import "components/gallery";
+
+@import "components/toc";
+
+@import "components/blog-single";
+
 @import "custom";

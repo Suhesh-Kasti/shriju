@@ -1,9 +1,12 @@
-<!-- modern page title with parallax effect -->
+{{ define "main" }}
+
+<!-- page title -->
 <section class="modern-page-title bg-primary position-relative overflow-hidden" id="parallax">
   <div class="container position-relative" style="z-index: 10;">
     <div class="row">
       <div class="col-12 text-center" data-aos="fade-up">
         <h1 class="text-white font-secondary position-relative z-index-1">{{.Title}}</h1>
+        <p class="text-white lead position-relative z-index-1">{{.Description}}</p>
       </div>
     </div>
     <!-- Large background text -->
@@ -27,16 +30,16 @@
       {{ partial "svg.html" (dict "Src" "images/illustrations/dots-orange.svg" "Alt" "bg-shape" "Width" "70" "Height" "70") }}
     </div>
     <div class="layer shape-layer shape-layer-4" id="l5">
-      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-yellow.svg" "Alt" "bg-shape" "Width" "70" "Height" "70") }}
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-pink.svg" "Alt" "bg-shape" "Width" "60" "Height" "60") }}
     </div>
     <div class="layer shape-layer shape-layer-5" id="l6">
       {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-cyan.svg" "Alt" "bg-shape" "Width" "80" "Height" "80") }}
     </div>
     <div class="layer shape-layer shape-layer-6" id="l7">
-      {{ partial "svg.html" (dict "Src" "images/illustrations/dots-group-orange.svg" "Alt" "bg-shape" "Width" "60" "Height" "60") }}
+      {{ partial "svg.html" (dict "Src" "images/illustrations/dots-group-orange.svg" "Alt" "bg-shape" "Width" "100" "Height" "100") }}
     </div>
     <div class="layer shape-layer shape-layer-7" id="l8">
-      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-pink-round.svg" "Alt" "bg-shape" "Width" "100" "Height" "100") }}
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-pink-round.svg" "Alt" "bg-shape" "Width" "70" "Height" "70") }}
     </div>
     <div class="layer shape-layer shape-layer-8" id="l9">
       {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-cyan-2.svg" "Alt" "bg-shape" "Width" "120" "Height" "120") }}
@@ -64,4 +67,34 @@
   });
   </script>
 </section>
-<!-- /modern page title -->
+<!-- /page title -->
+
+<!-- gallery content -->
+<section class="section gallery-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mb-5" data-aos="fade-up">
+        <div class="content">
+          {{ .Content }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row gallery-grid" id="gallery-container">
+      <!-- Gallery images will be loaded here via JavaScript -->
+    </div>
+  </div>
+
+  <!-- bg shapes -->
+  {{ partial "image.html" (dict "Src" "images/backgrounds/map.png" "Alt" "map" "Class" `bg-map`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/dots-group-v.svg" "Alt" "map" "Class" `bg-shape-1`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/leaf-orange.svg" "Alt" "map" "Class" `bg-shape-2`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/dots-group-sm.svg" "Alt" "map" "Class" `bg-shape-3`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/leaf-pink-round.svg" "Alt" "map" "Class" `bg-shape-4`) }}
+  {{ partial "image.html" (dict "Src" "images/illustrations/leaf-cyan.svg" "Alt" "map" "Class" `bg-shape-5`) }}
+</section>
+<!-- /gallery content -->
+
+<!-- gallery scripts are loaded from gallery-handler.js -->
+
+{{ end }}
