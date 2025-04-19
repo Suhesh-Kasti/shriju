@@ -50,6 +50,6 @@ clients_logo_slider:
 Oh hey, you found me! 👀✨
 I’m Shrijana — graphic designer, color enthusiast, and unofficial queen of “bholi bata sure padne” 💅🎨 I specialize in making brands look so cute they’ll make your ex jealous and your grandma proud. From logos that sparkle (figuratively... usually) to banners that slay, I’m here to bring your dream aesthetic to life.
 
-When not glued to my screen, I'm probably pushing pixels around, you’ll find me fighting with my buddies ([Shriya](https://shriyana.pages.dev/) and [Sami](https://sami.pages.dev/)), preventing my icecream from melting off using my tongue 👅, and asking my plants for design advice (they’re very supportive 🌿).
+When not glued to my screen, I'm probably fighting with my buddies ([Shriya](https://shriyana.pages.dev/) and [Sami](https://sami.pages.dev/)), preventing my icecream from melting off using my tongue 👅, and asking my plants for design advice (they’re very supportive 🌿).
 
 Let’s make magic together — cute, quirky, totally-you kind of magic. 💖✨

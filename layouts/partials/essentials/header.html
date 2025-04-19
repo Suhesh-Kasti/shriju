@@ -44,7 +44,22 @@
         </li>
         {{ end }}
         {{ end }}
+        <li class="nav-item d-none d-lg-block">
+          <div class="nav-link search-toggle">
+            <i class="ti-search"></i>
+          </div>
+        </li>
       </ul>
+
+      <!-- Desktop Search Form -->
+      <div class="desktop-search-form d-none d-lg-block">
+        {{ partial "components/search-form.html" . }}
+      </div>
+
+      <!-- Mobile Search Form - appears at bottom of mobile menu -->
+      <div class="mobile-search-form d-lg-none mt-3">
+        {{ partial "components/search-form.html" . }}
+      </div>
     </div>
   </nav>
 </header>

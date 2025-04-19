@@ -1,12 +1,49 @@
 <div class="col-lg-4 col-sm-6 mb-4">
-  <article class="card shadow overflow-hidden">
-    <a href="{{.Permalink}}" title="{{.Title }}">
-      {{ partial "image.html" (dict "Src" .Params.Image "Alt" .Title) }}
+  <article class="card blog-card shadow overflow-hidden">
+    <!-- Blog Image on top -->
+    <a href="{{.Permalink}}" title="{{.Title }}" class="blog-image-link">
+      {{ partial "image.html" (dict "Src" .Params.Image "Alt" .Title "Class" "blog-card-image") }}
     </a>
+
     <div class="card-body p-4">
-      <h3 class="h4 card-title mb-0"><a class="text-dark" href="{{.Permalink}}">{{.Title }}</a></h3>
-      <p class="card-text mt-1 mb-3">{{ .Summary | truncate 120 }}</p>
-      <a href="{{.Permalink}}" class="btn btn-sm btn-primary">Read More <span class="visually-hidden">Details</span></a>
+      <!-- Blog Title -->
+      <h3 class="h4 card-title"><a class="text-dark" href="{{.Permalink}}">{{.Title }}</a></h3>
+
+      <!-- Blog Time and Category -->
+      <div class="blog-meta mb-2">
+        <span class="text-muted me-2"><i class="ti-calendar me-1"></i>{{ .Date.Format "Jan 02, 2006" }}</span>
+        {{ with .Params.categories }}
+          <span class="text-muted"><i class="ti-folder me-1"></i>
+            {{ range $index, $category := . }}
+              {{- if $index }}, {{ end -}}
+              <a href="{{ `categories/` | relLangURL }}{{ . | urlize }}/" class="category-link">{{ . }}</a>
+            {{- end -}}
+          </span>
+        {{ end }}
+      </div>
+
+      <!-- Description Summary -->
+      <p class="card-text">
+        {{ if .Params.description }}
+          {{ .Params.description }}
+        {{ else }}
+          {{ .Summary }}
+        {{ end }}
+      </p>
+
+      <!-- Blog Tags -->
+      {{ with .Params.tags }}
+      <div class="blog-tags mb-3">
+        <i class="ti-tag me-1 text-muted"></i>
+        {{ range $index, $tag := . }}
+          {{- if $index }}, {{ end -}}
+          <a href="{{ `tags/` | relLangURL }}{{ . | urlize }}/" class="tag-link">{{ . }}</a>
+        {{- end -}}
+      </div>
+      {{ end }}
+
+      <!-- Read More Link -->
+      <a href="{{.Permalink}}" class="btn btn-link p-0 read-more-link">Read More <i class="ti-arrow-right"></i></a>
     </div>
   </article>
 </div>

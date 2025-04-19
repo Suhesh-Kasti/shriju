@@ -1,0 +1,11 @@
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" | default "Blog image" }}
+{{ $caption := .Get "caption" }}
+{{ $class := .Get "class" | default "img-fluid rounded" }}
+
+<figure class="blog-image {{ with .Get "figure-class" }}{{ . }}{{ end }}">
+  <img src="{{ $src }}" alt="{{ $alt }}" class="{{ $class }}">
+  {{ with $caption }}
+  <figcaption class="text-center mt-2 text-muted">{{ . }}</figcaption>
+  {{ end }}
+</figure>

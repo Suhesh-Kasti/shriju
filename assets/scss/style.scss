@@ -47,4 +47,12 @@ $font-icon: '{{.font_icon | default "Font Awesome 5 Free"}}';
 
 @import "components/blog-single";
 
+@import "components/blog-card";
+
+@import "components/code-blocks";
+
+@import "components/responsive-tables";
+
+@import "components/navbar-search";
+
 @import "custom";

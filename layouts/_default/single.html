@@ -30,6 +30,22 @@
             </div>
           </div>
 
+          <style>
+            /* Inline CSS to fix code block spacing */
+            .content pre code {
+              line-height: 1.4 !important;
+            }
+            .content pre code br {
+              display: none !important;
+            }
+            .content pre code span, .content pre code div {
+              line-height: 1.4 !important;
+              margin: 0 !important;
+              padding: 0 !important;
+              min-height: 0 !important;
+            }
+          </style>
+
           {{ if .Params.tags }}
           <div class="blog-tags mt-5" data-aos="fade-up">
             <h4 class="mb-3">Tags</h4>

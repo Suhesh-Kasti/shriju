@@ -392,6 +392,36 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+
+// Additional fixes for code blocks
+.content {
+  pre {
+    margin: 1.5rem 0;
+    background-color: #2d2d2d;
+    border-radius: 8px;
+    overflow-x: auto;
+
+    code {
+      font-family: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      white-space: pre;
+
+      // Fix for large gaps between lines
+      br {
+        display: none;
+      }
+
+      // Ensure consistent line height
+      span, div {
+        line-height: 1.4 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+    }
+  }
+}
+
 // Additional blog section fixes
 .section-title + .row {
   margin-top: 30px;

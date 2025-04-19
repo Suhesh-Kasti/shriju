@@ -1,0 +1,18 @@
+{{ $src := .Destination }}
+{{ $alt := .Text }}
+{{ $title := .Title }}
+
+{{ if not (or (hasPrefix $src "http://") (hasPrefix $src "https://")) }}
+  {{ if hasPrefix $src "/" }}
+    {{ $src = $src }}
+  {{ else }}
+    {{ $src = print "/" $src }}
+  {{ end }}
+{{ end }}
+
+<figure class="blog-image">
+  <img src="{{ $src }}" alt="{{ $alt }}" class="img-fluid rounded" {{ with $title }}title="{{ . }}"{{ end }}>
+  {{ with $title }}
+  <figcaption class="text-center mt-2 text-muted">{{ . }}</figcaption>
+  {{ end }}
+</figure>

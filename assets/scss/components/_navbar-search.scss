@@ -1,0 +1,114 @@
+// Navbar Search Styling
+
+// Search toggle button
+.search-toggle {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    color: $color-primary;
+  }
+  
+  &.active {
+    color: $color-primary;
+  }
+}
+
+// Desktop search form
+.desktop-search-form {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 300px;
+  background-color: $white;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .search-form {
+    .form-control {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border: 1px solid $border-color;
+      height: 40px;
+      
+      &:focus {
+        box-shadow: none;
+        border-color: $color-primary;
+      }
+    }
+    
+    .btn {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      height: 40px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+}
+
+// Mobile search form
+.mobile-search-form {
+  width: 100%;
+  
+  .search-form {
+    .form-control {
+      background-color: rgba($white, 0.1);
+      border: 1px solid rgba($white, 0.2);
+      color: $white;
+      height: 40px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      
+      &::placeholder {
+        color: rgba($white, 0.7);
+      }
+      
+      &:focus {
+        box-shadow: none;
+        border-color: rgba($white, 0.5);
+      }
+    }
+    
+    .btn {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      height: 40px;
+      padding-left: 15px;
+      padding-right: 15px;
+      background-color: $white;
+      color: $color-primary;
+      border-color: $white;
+      
+      &:hover {
+        background-color: darken($white, 10%);
+        border-color: darken($white, 10%);
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@include tablet {
+  .desktop-search-form {
+    width: 250px;
+  }
+}
+
+@include mobile {
+  .mobile-search-form {
+    margin-top: 15px;
+  }
+}
