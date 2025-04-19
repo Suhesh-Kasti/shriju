@@ -85,7 +85,7 @@
               {{ end }}
 
               {{ range uniq $tilCategories }}
-              <a href="{{ "categories/" | relLangURL }}{{ . | urlize }}" class="filter-item" style="background-color: {{ index (slice "#fdb157" "#9473e6" "#bdecf6" "#ffbcaa") (mod (len .) 4) }}">
+              <a href="{{ "categories/" | relLangURL }}{{ . | urlize }}/" class="filter-item" style="background-color: {{ index (slice "#fdb157" "#9473e6" "#41228e" "#ff6b8b") (mod (len .) 4) }}; color: {{ index (slice "#fff" "#fff" "#fff" "#fff") (mod (len .) 4) }}; font-weight: 500;">
                 {{ . }}
               </a>
               {{ end }}
@@ -103,7 +103,7 @@
               {{ end }}
 
               {{ range uniq $tilTags }}
-              <a href="{{ "tags/" | relLangURL }}{{ . | urlize }}" class="filter-item" style="background-color: {{ index (slice "#fdb15788" "#9473e688" "#bdecf688" "#ffbcaa88") (mod (len .) 4) }}">
+              <a href="{{ "tags/" | relLangURL }}{{ . | urlize }}/" class="filter-item" style="background-color: {{ index (slice "#fdb157" "#9473e6" "#41228e" "#ff6b8b") (mod (len .) 4) }}; color: {{ index (slice "#fff" "#fff" "#fff" "#fff") (mod (len .) 4) }}; font-weight: 500; opacity: 0.85;">
                 {{ . }}
               </a>
               {{ end }}
@@ -133,7 +133,7 @@
             <div class="til-meta">
               <div class="til-tags">
                 {{ range .Params.tags }}
-                <a href="{{ "tags/" | relLangURL }}{{ . | urlize }}" class="til-tag">{{ . }}</a>
+                <a href="{{ "tags/" | relLangURL }}{{ . | urlize }}/" class="til-tag" style="background-color: {{ index (slice "#fdb157" "#9473e6" "#41228e" "#ff6b8b") (mod (len .) 4) }}; color: {{ index (slice "#fff" "#fff" "#fff" "#fff") (mod (len .) 4) }};">{{ . }}</a>
                 {{ end }}
               </div>
               <a href="{{ .Permalink }}" class="til-read-more">Read More <i class="fas fa-arrow-right"></i></a>

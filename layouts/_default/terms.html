@@ -1,0 +1,519 @@
+{{ define "main" }}
+
+<!-- Terms page (list of categories or tags) -->
+<section class="hero-area bg-primary overflow-hidden" id="parallax" style="height: 50vh; min-height: 400px;">
+  <div class="container position-relative">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8" data-aos="fade-up">
+        <h1 class="text-white font-secondary position-relative z-index-1">{{ .Title }}</h1>
+        <p class="text-white lead">Browse all {{ if eq .Type "categories" }}categories{{ else }}tags{{ end }}</p>
+      </div>
+    </div>
+    <!-- Large background text -->
+    <div class="bg-text-wrapper">
+      <div class="bg-text" data-depth="0.05">{{ .Title }}</div>
+    </div>
+  </div>
+  <div class="hero-shapes">
+    <div class="layer-bg w-100">
+      {{ partial "image.html" (dict "Src" "images/illustrations/leaf-bg.png" "Alt" "bg-shape" "Class" `w-100`) }}
+    </div>
+    <div class="layer shape-layer shape-layer-1" id="l2">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/dots-cyan.svg" "Alt" "bg-shape" "Width" "80" "Height" "80") }}
+    </div>
+    <div class="layer shape-layer shape-layer-2" id="l3">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-orange.svg" "Alt" "bg-shape" "Width" "90" "Height" "90") }}
+    </div>
+    <div class="layer shape-layer shape-layer-3" id="l4">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/dots-orange.svg" "Alt" "bg-shape" "Width" "70" "Height" "70") }}
+    </div>
+    <div class="layer shape-layer shape-layer-4" id="l5">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-yellow.svg" "Alt" "bg-shape" "Width" "70" "Height" "70") }}
+    </div>
+    <div class="layer shape-layer shape-layer-5" id="l6">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-cyan.svg" "Alt" "bg-shape" "Width" "80" "Height" "80") }}
+    </div>
+    <div class="layer shape-layer shape-layer-6" id="l7">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/dots-group-orange.svg" "Alt" "bg-shape" "Width" "60" "Height" "60") }}
+    </div>
+    <div class="layer shape-layer shape-layer-7" id="l8">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-pink-round.svg" "Alt" "bg-shape" "Width" "100" "Height" "100") }}
+    </div>
+    <div class="layer shape-layer shape-layer-8" id="l9">
+      {{ partial "svg.html" (dict "Src" "images/illustrations/leaf-cyan-2.svg" "Alt" "bg-shape" "Width" "120" "Height" "120") }}
+    </div>
+  </div>
+
+  <script>
+  $(document).ready(function() {
+    if (typeof Parallax !== 'undefined') {
+      // Initialize hero parallax
+      var heroParallax = document.getElementById('parallax');
+      if (heroParallax) {
+        try {
+          var heroParallaxInstance = new Parallax(heroParallax);
+        } catch (error) {
+          console.warn('Error initializing hero parallax:', error);
+        }
+      }
+    }
+  });
+  </script>
+</section>
+
+<!-- Terms content section -->
+<section class="section terms-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2 class="section-title">All {{ .Title }}</h2>
+        <p class="section-subtitle">{{ len .Pages }} {{ if eq (len .Pages) 1 }}{{ .Title | singularize }}{{ else }}{{ .Title }}{{ end }} available</p>
+      </div>
+    </div>
+
+    <!-- Terms cloud -->
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="terms-cloud" data-aos="fade-up">
+          {{ range .Pages.ByTitle }}
+          <a href="{{ .Permalink }}" class="term-item" style="font-size: {{ add 0.8 (mul 0.1 (len .Pages)) }}rem;">
+            {{ .Title }} <span class="term-count">{{ len .Pages }}</span>
+          </a>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Filter -->
+    <div class="section-filter mb-5" data-aos="fade-up">
+      <div class="filter-label">Filter by content type:</div>
+      <div class="filter-buttons">
+        <button class="filter-button active" data-section="all">All</button>
+        <button class="filter-button" data-section="til">TIL</button>
+        <button class="filter-button" data-section="blog">Blog</button>
+        <button class="filter-button" data-section="portfolio">Portfolio</button>
+      </div>
+    </div>
+
+    <!-- Terms list -->
+    <div class="row mt-5">
+      <div class="col-lg-10 mx-auto">
+        <div class="terms-list" data-aos="fade-up" data-aos-delay="200">
+          {{ range .Pages.ByTitle }}
+          <div class="term-list-item">
+            <div class="term-header">
+              <h3 class="term-title">
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+              </h3>
+              <span class="term-count">{{ len .Pages }} {{ if eq (len .Pages) 1 }}entry{{ else }}entries{{ end }}</span>
+
+              <!-- Section badges -->
+              <div class="term-sections">
+                {{ $hasTil := false }}
+                {{ $hasBlog := false }}
+                {{ $hasPortfolio := false }}
+
+                {{ range .Pages }}
+                  {{ if eq .Section "til" }}{{ $hasTil = true }}{{ end }}
+                  {{ if eq .Section "post" }}{{ $hasBlog = true }}{{ end }}
+                  {{ if eq .Section "portfolio" }}{{ $hasPortfolio = true }}{{ end }}
+                {{ end }}
+
+                {{ if $hasTil }}
+                <span class="section-badge til">TIL</span>
+                {{ end }}
+
+                {{ if $hasBlog }}
+                <span class="section-badge blog">Blog</span>
+                {{ end }}
+
+                {{ if $hasPortfolio }}
+                <span class="section-badge portfolio">Portfolio</span>
+                {{ end }}
+              </div>
+            </div>
+            <div class="term-entries">
+              {{ range first 5 .Pages.ByDate.Reverse }}
+              <a href="{{ .Permalink }}" class="term-entry" data-section="{{ .Section }}">
+                <span class="entry-title">{{ .Title }}</span>
+                <span class="entry-meta">
+                  <span class="entry-date">{{ .Date.Format "Jan 02, 2006" }}</span>
+                  <span class="entry-section">{{ if eq .Section "til" }}TIL{{ else if eq .Section "post" }}Blog{{ else if eq .Section "portfolio" }}Portfolio{{ else }}{{ .Section | title }}{{ end }}</span>
+                </span>
+              </a>
+              {{ end }}
+              {{ if gt (len .Pages) 5 }}
+              <a href="{{ .Permalink }}" class="term-view-all">View all {{ len .Pages }} entries &rarr;</a>
+              {{ end }}
+            </div>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+
+    <!-- No Results Message -->
+    <div class="no-results" style="display: none;" data-aos="fade-up">
+      <div class="alert alert-info text-center">
+        <i class="fas fa-info-circle mr-2"></i> No terms found for the selected filter.
+      </div>
+    </div>
+
+    <!-- Filter Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const termItems = document.querySelectorAll('.term-list-item');
+        const termEntries = document.querySelectorAll('.term-entry');
+        const noResults = document.querySelector('.no-results');
+
+        // Get section from URL if present
+        const urlParams = new URLSearchParams(window.location.search);
+        const sectionParam = urlParams.get('section');
+
+        // Function to filter items
+        function filterItems(section) {
+          let visibleCount = 0;
+
+          if (section === 'all') {
+            // Show all terms
+            termItems.forEach(item => {
+              item.style.display = '';
+              visibleCount++;
+            });
+
+            // Show all entries
+            termEntries.forEach(entry => {
+              entry.style.display = '';
+            });
+          } else {
+            // Filter terms based on whether they have entries in the selected section
+            termItems.forEach(item => {
+              const hasSection = item.querySelector(`.section-badge.${section}`);
+              if (hasSection) {
+                item.style.display = '';
+                visibleCount++;
+
+                // Filter entries within this term
+                const entries = item.querySelectorAll('.term-entry');
+                entries.forEach(entry => {
+                  if (entry.dataset.section === section) {
+                    entry.style.display = '';
+                  } else {
+                    entry.style.display = 'none';
+                  }
+                });
+              } else {
+                item.style.display = 'none';
+              }
+            });
+          }
+
+          // Show/hide no results message
+          if (visibleCount === 0) {
+            noResults.style.display = 'block';
+          } else {
+            noResults.style.display = 'none';
+          }
+
+          // Update URL
+          if (section !== 'all') {
+            const url = new URL(window.location);
+            url.searchParams.set('section', section);
+            window.history.replaceState({}, '', url);
+          } else {
+            const url = new URL(window.location);
+            url.searchParams.delete('section');
+            window.history.replaceState({}, '', url);
+          }
+        }
+
+        // Add click event to buttons
+        filterButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+
+            // Add active class to clicked button
+            this.classList.add('active');
+
+            // Filter items
+            filterItems(this.dataset.section);
+          });
+        });
+
+        // Initial filter based on URL param or default to 'all'
+        if (sectionParam && ['til', 'blog', 'portfolio'].includes(sectionParam)) {
+          const activeButton = document.querySelector(`.filter-button[data-section="${sectionParam}"]`);
+          if (activeButton) {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            activeButton.classList.add('active');
+            filterItems(sectionParam);
+          }
+        } else {
+          filterItems('all');
+        }
+      });
+    </script>
+  </div>
+</section>
+
+<!-- Add custom CSS for terms page -->
+<style>
+  .terms-section {
+    padding: 80px 0;
+  }
+
+  .section-subtitle {
+    color: #777;
+    margin-bottom: 40px;
+  }
+
+  /* Filter styles */
+  .section-filter {
+    margin-bottom: 30px;
+    background: rgba(65, 34, 142, 0.03);
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .filter-label {
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #41228e;
+  }
+
+  .filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .filter-button {
+    background: white;
+    border: 1px solid rgba(65, 34, 142, 0.2);
+    color: #555;
+    padding: 8px 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .filter-button:hover {
+    background: rgba(65, 34, 142, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .filter-button.active {
+    background: #41228e;
+    color: white;
+    border-color: #41228e;
+    box-shadow: 0 4px 10px rgba(65, 34, 142, 0.3);
+  }
+
+  /* No results message */
+  .no-results {
+    padding: 30px;
+    text-align: center;
+  }
+
+  .alert-info {
+    background-color: rgba(65, 34, 142, 0.1);
+    color: #41228e;
+    border: none;
+    border-radius: 10px;
+  }
+
+  /* Terms cloud */
+  .terms-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+  }
+
+  .term-item {
+    display: inline-block;
+    padding: 8px 15px;
+    background: rgba(65, 34, 142, 0.05);
+    border-radius: 30px;
+    color: #41228e;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .term-item:hover {
+    background: rgba(65, 34, 142, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(65, 34, 142, 0.1);
+  }
+
+  .term-count {
+    display: inline-block;
+    background: rgba(65, 34, 142, 0.1);
+    color: #41228e;
+    border-radius: 20px;
+    padding: 2px 8px;
+    font-size: 0.8em;
+    margin-left: 5px;
+  }
+
+  /* Terms list */
+  .terms-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .term-list-item {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .term-list-item:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+  }
+
+  .term-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(45deg, rgba(65, 34, 142, 0.05), rgba(253, 177, 87, 0.05));
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .term-title {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .term-title a {
+    color: #41228e;
+    text-decoration: none;
+  }
+
+  /* Section badges */
+  .term-sections {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+  }
+
+  .section-badge {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 500;
+  }
+
+  .section-badge.til {
+    background-color: #41228e;
+  }
+
+  .section-badge.blog {
+    background-color: #fdb157;
+  }
+
+  .section-badge.portfolio {
+    background-color: #ff6b8b;
+  }
+
+  /* Term entries */
+  .term-entries {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+  }
+
+  .term-entry {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    color: #555;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+
+  .term-entry:hover {
+    background: rgba(65, 34, 142, 0.03);
+  }
+
+  .entry-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+  }
+
+  .entry-date {
+    color: #999;
+    font-size: 0.8em;
+  }
+
+  .entry-section {
+    font-size: 0.7em;
+    padding: 2px 6px;
+    border-radius: 10px;
+    background-color: rgba(65, 34, 142, 0.1);
+    color: #41228e;
+  }
+
+  .term-view-all {
+    padding: 10px 20px;
+    color: #41228e;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    border-top: 1px dashed rgba(65, 34, 142, 0.1);
+  }
+
+  .term-view-all:hover {
+    background: rgba(65, 34, 142, 0.03);
+  }
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .term-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .term-count {
+      margin-left: 0;
+    }
+
+    .term-entry {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .entry-meta {
+      align-items: flex-start;
+      flex-direction: row;
+      gap: 10px;
+    }
+
+    .filter-buttons {
+      justify-content: center;
+    }
+
+    .filter-button {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+    }
+  }
+</style>
+
+{{ end }}
