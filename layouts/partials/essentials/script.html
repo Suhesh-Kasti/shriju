@@ -32,6 +32,7 @@
 {{ $scripts = $scripts | append (resources.Get "js/gallery-handler.js") }}
 {{ $scripts = $scripts | append (resources.Get "js/code-block-fix.js") }}
 {{ $scripts = $scripts | append (resources.Get "js/search-toggle.js") }}
+{{ $scripts = $scripts | append (resources.Get "js/cursor-animation.js") }}
 {{ $scripts = $scripts | resources.Concat "js/scripts.js" }}
 {{ if hugo.IsProduction }}
   {{ $scripts = $scripts | fingerprint "sha512" }}

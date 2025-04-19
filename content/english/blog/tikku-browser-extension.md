@@ -2,7 +2,7 @@
 title: "Tikku: The Browser Extension That Simplified Our Tech Support Workflow"
 date: 2023-09-05T13:45:00+05:45
 image: "images/blog/projects/tikku.jpg"
-description: "How a simple browser extension called Tikku transformed the ticket writing process for tech support representatives at Subisu"
+description: "How a simple browser extension called Tikku can transform the ticket writing process for tech support representatives at Subisu"
 categories: ["Technology", "Productivity"]
 tags: ["Browser Extension", "Automation", "Tech Support", "Productivity Tools"]
 draft: false

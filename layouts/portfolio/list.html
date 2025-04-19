@@ -3,42 +3,48 @@
 {{ partial "components/modern-page-title.html" . }}
 
 <!-- portfolio -->
-<section class="section">
+<section class="section position-relative">
+  <!-- Decorative elements -->
+  <div class="portfolio-decoration bubble-1"></div>
+  <div class="portfolio-decoration bubble-2"></div>
+  <div class="portfolio-decoration bubble-3"></div>
+  <div class="portfolio-decoration bubble-4"></div>
+
   <div class="container">
-    <div class="row mb-5">
-      <div class="col-12">
-        <div class="btn-group btn-group-toggle justify-content-center d-flex flex-wrap" data-bs-toggle="buttons">
-          <label class="btn btn-sm btn-primary active">
-            <input type="radio" name="shuffle-filter" class="d-none" value="all" checked="checked" />All
-          </label>
-          {{ $categories := slice }}
-          {{ range .RegularPages }}
-          {{ range .Params.categories }}
-          {{ $categories = $categories | append . }}
-          {{ end }}
-          {{ end }}
-          {{ range ( $categories | uniq ) }}
-          <label class="btn btn-sm btn-primary">
-            <input type="radio" name="shuffle-filter" class="d-none" value="{{ . | urlize }}" />{{ . | humanize }}
-          </label>
-          {{ end }}
-        </div>
-      </div>
-    </div>
-    <div class="row shuffle-wrapper">
+    <!-- Portfolio Grid -->
+    <div class="portfolio-grid" id="portfolio-grid">
       {{ range .RegularPages }}
-      <div class="col-lg-4 col-md-6 col-sm-6 mb-4 shuffle-item"
-        data-groups="[{{range $index, $element:= .Params.categories }}{{if ne $index 0}},{{end}}&quot;{{. | urlize}}&quot;{{ end }}]">
-        <div class="position-relative rounded hover-wrapper">
-          {{ partial "image.html" (dict "Src" .Params.image "Alt" "portfolio-image"  "Class" `rounded w-100 d-block`) }}
-          <div class="hover-overlay">
-            <div class="hover-content">
-              <a class="btn btn-light btn-sm" href="{{ .Permalink }}">view project</a>
-            </div>
+      <div class="portfolio-item" data-category="{{range $index, $element:= .Params.categories }}{{if ne $index 0}} {{end}}{{. | urlize}}{{ end }}">
+        <div class="portfolio-image">
+          <img src="{{ .Params.image | absURL }}" alt="{{ .Title }}" loading="lazy">
+        </div>
+        <div class="hover-overlay">
+          <div class="hover-content">
+            <h4 class="project-title">{{ .Title }}</h4>
+            <p class="project-category">{{ delimit .Params.categories ", " }}</p>
+            <a href="{{ .Permalink }}" class="btn">View Project</a>
           </div>
         </div>
+        <a href="{{ .Permalink }}" class="portfolio-item-link" aria-label="View {{ .Title }}"></a>
       </div>
       {{ end }}
+    </div>
+
+    <!-- Portfolio Filter (Bottom) -->
+    <div class="portfolio-filter-bottom">
+      <span class="filter-label">Filter Projects by Category</span>
+      <div class="filter-buttons">
+        <button class="filter-item active" data-filter="all">All Projects</button>
+        {{ $categories := slice }}
+        {{ range .RegularPages }}
+        {{ range .Params.categories }}
+        {{ $categories = $categories | append . }}
+        {{ end }}
+        {{ end }}
+        {{ range ( $categories | uniq ) }}
+        <button class="filter-item" data-filter="{{ . | urlize }}">{{ . | humanize }}</button>
+        {{ end }}
+      </div>
     </div>
   </div>
 </section>
@@ -49,5 +55,36 @@
     {{ partial "components/client-slider.html" . }}
   </div>
 </section>
+
+<!-- Portfolio Filter JavaScript -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Filter functionality
+    const grid = document.getElementById('portfolio-grid');
+    const items = grid.querySelectorAll('.portfolio-item');
+    const filterButtons = document.querySelectorAll('.portfolio-filter-bottom .filter-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+
+        // Add active class to clicked button
+        this.classList.add('active');
+
+        const filterValue = this.getAttribute('data-filter');
+
+        // Show/hide items based on filter
+        items.forEach(item => {
+          if (filterValue === 'all' || item.getAttribute('data-category').includes(filterValue)) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
 
 {{ end }}

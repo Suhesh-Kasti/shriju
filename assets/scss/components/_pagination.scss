@@ -1,0 +1,90 @@
+// Pagination Styling
+
+.pagination-nav {
+  margin-top: 50px;
+  
+  .pagination {
+    .page-item {
+      margin: 0 5px;
+      
+      .page-link {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $text-dark;
+        border: 1px solid $border-color;
+        background-color: $white;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        
+        &:hover {
+          background-color: rgba($color-primary, 0.1);
+          color: $color-primary;
+          border-color: rgba($color-primary, 0.3);
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+      }
+      
+      &.active {
+        .page-link {
+          background-color: $color-primary;
+          color: $white;
+          border-color: $color-primary;
+          box-shadow: 0 5px 15px rgba($color-primary, 0.3);
+        }
+      }
+      
+      &.disabled {
+        .page-link {
+          color: $text-light;
+          cursor: not-allowed;
+          
+          &:hover {
+            background-color: $white;
+            color: $text-light;
+            border-color: $border-color;
+            transform: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+          }
+        }
+      }
+    }
+  }
+  
+  @include tablet {
+    margin-top: 40px;
+    
+    .pagination {
+      .page-item {
+        margin: 0 3px;
+        
+        .page-link {
+          width: 35px;
+          height: 35px;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+  
+  @include mobile {
+    margin-top: 30px;
+    
+    .pagination {
+      .page-item {
+        margin: 0 2px;
+        
+        .page-link {
+          width: 30px;
+          height: 30px;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}

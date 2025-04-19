@@ -350,32 +350,95 @@
 
 {{ if .Params.portfolio.enable }}
 <!-- portfolio -->
-<section class="section">
+<section class="section position-relative">
+  <!-- Decorative elements -->
+  <div class="portfolio-decoration bubble-1"></div>
+  <div class="portfolio-decoration bubble-2"></div>
+  <div class="portfolio-decoration bubble-3"></div>
+  <div class="portfolio-decoration bubble-4"></div>
+
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 text-center" data-aos="fade-up">
         <h2 class="section-title">{{ .Params.portfolio.title | markdownify }}</h2>
       </div>
     </div>
-    <div class="row shuffle-wrapper">
+
+    <!-- Portfolio Filter -->
+    <div class="portfolio-filter">
+      <button class="filter-item active" data-filter="all">All</button>
+      {{ $categories := slice }}
       {{ $item:= .Params.portfolio.item_show }}
       {{ range $index, $element := first $item (where .Site.RegularPages "Section" "portfolio") }}
-      <div class="col-lg-4 col-md-6 col-sm-6 mb-4 shuffle-item">
-        <div class="position-relative rounded hover-wrapper">
-          {{ partial "image.html" (dict "Src" $element.Params.image "Alt" "portfolio-image" "Class" `rounded w-100 d-block`)
-          }}
-          <div class="hover-overlay">
-            <div class="hover-content">
-              <a class="btn btn-light btn-sm" href="{{ $element.Permalink | safeURL }}">view project</a>
-            </div>
+      {{ range $element.Params.categories }}
+      {{ $categories = $categories | append . }}
+      {{ end }}
+      {{ end }}
+      {{ range ( $categories | uniq ) }}
+      <button class="filter-item" data-filter="{{ . | urlize }}">{{ . | humanize }}</button>
+      {{ end }}
+    </div>
+
+    <!-- Portfolio Grid -->
+    <div class="portfolio-grid" id="home-portfolio-grid">
+      {{ $item:= .Params.portfolio.item_show }}
+      {{ range $index, $element := first $item (where .Site.RegularPages "Section" "portfolio") }}
+      <div class="portfolio-item" data-category="{{range $index, $cat:= $element.Params.categories }}{{if ne $index 0}} {{end}}{{$cat | urlize}}{{ end }}">
+        <div class="portfolio-image">
+          <img src="{{ $element.Params.image | absURL }}" alt="{{ $element.Title }}" loading="lazy">
+        </div>
+        <div class="hover-overlay">
+          <div class="hover-content">
+            <h4 class="project-title">{{ $element.Title }}</h4>
+            <p class="project-category">{{ delimit $element.Params.categories ", " }}</p>
+            <a href="{{ $element.Permalink | safeURL }}" class="btn">View Project</a>
           </div>
         </div>
+        <a href="{{ $element.Permalink | safeURL }}" class="portfolio-item-link" aria-label="View {{ $element.Title }}"></a>
       </div>
       {{ end }}
+    </div>
+
+    <!-- View All Button -->
+    <div class="text-center mt-5">
+      <a href="{{ "portfolio" | relLangURL }}" class="btn btn-primary">View All Projects</a>
     </div>
   </div>
 </section>
 <!-- /portfolio -->
+
+<!-- Portfolio Filter JavaScript -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Filter functionality for home portfolio
+    const grid = document.getElementById('home-portfolio-grid');
+    if (!grid) return; // Exit if grid doesn't exist
+
+    const items = grid.querySelectorAll('.portfolio-item');
+    const filterButtons = document.querySelectorAll('.portfolio-filter .filter-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+
+        // Add active class to clicked button
+        this.classList.add('active');
+
+        const filterValue = this.getAttribute('data-filter');
+
+        // Show/hide items based on filter
+        items.forEach(item => {
+          if (filterValue === 'all' || item.getAttribute('data-category').includes(filterValue)) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
 {{ end }}
 
 

@@ -1,0 +1,11 @@
+{{ $logo := site.Params.logo }}
+{{ $logoWidth := site.Params.logo_width }}
+{{ $logoText := site.Params.logo_text }}
+
+{{ if $logo }}
+  <div class="logo-container">
+    <img loading="lazy" decoding="async" class="img-fluid" width="{{ $logoWidth }}" src="{{ $logo | absURL }}" alt="{{ site.Title }}">
+  </div>
+{{ else }}
+  {{ $logoText }}
+{{ end }}

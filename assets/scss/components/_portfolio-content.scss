@@ -1,0 +1,139 @@
+// Portfolio Content Styling
+
+// Fix for the content area in portfolio single pages
+.content {
+  // Fix for bold text
+  strong, b {
+    font-weight: 600;
+    font-size: inherit;
+    display: inline;
+    color: $text-dark;
+  }
+  
+  // Fix for ordered lists
+  ol {
+    list-style-type: decimal;
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    
+    li {
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+      
+      &::marker {
+        color: $color-primary;
+        font-weight: 600;
+      }
+      
+      ol {
+        list-style-type: lower-alpha;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+  
+  // Fix for unordered lists
+  ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    
+    li {
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+      
+      &::marker {
+        color: $color-primary;
+      }
+      
+      ul {
+        list-style-type: circle;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+  
+  // Fix for tables
+  table {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    border-collapse: collapse;
+    
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid $border-color;
+    }
+    
+    th {
+      background-color: rgba($color-primary, 0.05);
+      font-weight: 600;
+      color: $text-dark;
+    }
+    
+    tr:nth-child(even) {
+      background-color: rgba($color-primary, 0.02);
+    }
+  }
+  
+  // Fix for blockquotes
+  blockquote {
+    border-left: 4px solid $color-primary;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background-color: rgba($color-primary, 0.05);
+    border-radius: 0 4px 4px 0;
+    
+    p {
+      margin-bottom: 0;
+      font-style: italic;
+      color: $text-dark;
+    }
+  }
+  
+  // Fix for code blocks
+  pre {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    
+    code {
+      color: $text-dark;
+      background-color: transparent;
+      padding: 0;
+    }
+  }
+  
+  // Fix for inline code
+  code {
+    background-color: rgba($color-primary, 0.1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: $color-primary;
+  }
+  
+  // Fix for headings
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: $text-dark;
+  }
+  
+  // Fix for images
+  img {
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+    border-radius: 4px;
+  }
+  
+  // Fix for horizontal rule
+  hr {
+    margin: 2rem 0;
+    border-top: 1px solid $border-color;
+  }
+}

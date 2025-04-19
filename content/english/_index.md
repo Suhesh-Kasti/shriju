@@ -106,20 +106,35 @@ testimonial:
   enable : true
   title : "Testimonials"
   item:
-    - name : "Babulal Bishwokarma"
+    - name : "Babulal Biswokarma"
       image : "images/testimonial/client-1.png"
-      designation : "Professional Don"
-      content : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <strong>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</strong> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      designation : "CEO of Ganster Technology"
+      content : "Shrijana's design work for our company has been exceptional. Her ability to translate our technical requirements into visually appealing designs has significantly improved our brand image. <strong>Her attention to detail and creative problem-solving skills</strong> make her an invaluable asset to any project. We've seen measurable improvements in user engagement since implementing her designs."
 
-    - name : "Shriya Behalketi"
+    - name : "Shriya Bayalkoti"
       image : "images/testimonial/client-2.png"
-      designation : "Ek number chuchi"
-      content : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <strong>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</strong> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      designation : "Board Member of Leo Club of Kathmandu"
+      content : "Working with Shrijana on our event banners and promotional materials was a fantastic experience. She has a remarkable talent for capturing the essence of an event in her designs. <strong>Her work not only looked professional but also effectively communicated our message</strong> to our target audience. The materials she created helped us increase attendance at our community service events by over 30%."
+
+    - name : "Suhesh Kasti"
+      image : "images/testimonial/client-3.png"
+      designation : "Cybersecurity Professional"
+      content : "Shrijana's technical skills combined with her design expertise make her uniquely qualified for modern web projects. She understands both the aesthetic and functional aspects of digital products. <strong>Her work on our security dashboard interface improved both its usability and visual appeal</strong>, making complex information more accessible to our clients. I highly recommend her for any UI/UX project."
 
     - name : "Sami Bista"
+      image : "images/testimonial/client-1.png"
+      designation : "Board Member of Leo Club of Kathmandu"
+      content : "I've had the pleasure of collaborating with Shrijana on multiple projects, and her creativity never ceases to amaze me. She has a gift for understanding exactly what a project needs and delivering beyond expectations. <strong>Her designs are not only beautiful but also strategically thought out</strong> to achieve specific goals. She's responsive, professional, and genuinely passionate about her work."
+
+    - name : "Prazol Kaka"
+      image : "images/testimonial/client-2.png"
+      designation : "Owner of Desire Gadgets"
+      content : "The logo Shrijana designed for my gadget store perfectly captures our brand identity. It's modern, memorable, and works beautifully across all our marketing materials. <strong>Since launching with our new logo, we've seen increased brand recognition</strong> and customer engagement. Shrijana took the time to understand our business and created something that truly represents what we stand for."
+
+    - name : "Shushant Khatiwada"
       image : "images/testimonial/client-3.png"
-      designation : "Superwoman"
-      content : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <strong>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</strong> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      designation : "Professional Wordpress Developer and Designer"
+      content : "As a developer, I appreciate working with designers who understand the technical aspects of implementation. Shrijana is that rare designer who considers the development process in her work. <strong>Her designs are not only creative but also practical to implement</strong>, saving valuable development time. Her clear communication and organized design files make collaboration seamless and efficient."
 
 # client logo slider
 clients_logo_slider:
@@ -138,7 +153,7 @@ clients_logo_slider:
       URL : "#"
 
     - logo : "images/clients-logo/client-logo-5.png"
-      URL : "http://examplesite.com"  
+      URL : "http://examplesite.com"
 
 # blog
 blog:

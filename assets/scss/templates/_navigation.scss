@@ -1,13 +1,28 @@
 .navigation {
-  padding: 15px 30px;
+  padding: 5px 30px;
   transition: .3s ease;
 
   &.nav-bg {
     background-color: $color-primary;
-    padding: 8px 20px;
+    padding: 5px 20px;
 
     @include desktop {
       padding: 5px 15px;
+    }
+  }
+
+  .navbar-brand {
+    padding: 0;
+    margin: 0;
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+
+      img {
+        height: auto;
+        // Logo size will be controlled by the width parameter in params.toml
+      }
     }
   }
 

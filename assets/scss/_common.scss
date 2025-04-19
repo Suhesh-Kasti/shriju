@@ -23,10 +23,18 @@ body {
   justify-content: center;
 }
 
-ol,
-ul {
+// Reset lists only for navigation and components, not for content
+nav ol, nav ul,
+.navbar-nav,
+.list-unstyled,
+.list-inline,
+.social-icons,
+.footer-menu,
+.sidebar ul,
+.widget ul {
   list-style-type: none;
   margin: 0px;
+  padding: 0px;
 }
 
 img {

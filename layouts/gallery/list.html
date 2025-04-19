@@ -1,0 +1,360 @@
+{{ define "main" }}
+
+{{ partial "components/modern-page-title.html" . }}
+
+<!-- gallery -->
+<section class="section position-relative gallery-section">
+  <!-- Decorative elements -->
+  <div class="decoration bubble-1"></div>
+  <div class="decoration bubble-2"></div>
+  <div class="decoration bubble-3"></div>
+  <div class="decoration bubble-4"></div>
+  <div class="decoration bubble-5"></div>
+  <div class="decoration bubble-6"></div>
+  <div class="decoration star-1"></div>
+  <div class="decoration star-2"></div>
+  <div class="decoration star-3"></div>
+  <div class="decoration heart-1"></div>
+  <div class="decoration heart-2"></div>
+
+  <div class="container">
+    <div class="gallery-grid" id="gallery-grid">
+      {{ $galleryDir := "static/images/gallery/" }}
+      {{ $files := readDir $galleryDir }}
+      {{ range $index, $file := $files }}
+      <div class="gallery-item" style="--delay: {{ mul 0.05 $index }}s; --color-index: {{ mod $index 5 }}">
+        <div class="gallery-item-inner">
+          <a href="/images/gallery/{{ $file.Name }}" data-lightbox="gallery" data-title="{{ replace (replace $file.Name "." " ") (path.Ext $file.Name) "" | title }}">
+            <img src="/images/gallery/{{ $file.Name }}" alt="{{ replace (replace $file.Name "." " ") (path.Ext $file.Name) "" | title }}" loading="lazy">
+          </a>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+
+    <!-- Add lightbox CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+    <script>
+      // Initialize lightbox
+      lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true,
+        'albumLabel': 'Image %1 of %2',
+        'fadeDuration': 300,
+        'imageFadeDuration': 300
+      });
+    </script>
+  </div>
+</section>
+<!-- /gallery -->
+
+<style>
+  /* Gallery section styling */
+  .gallery-section {
+    overflow: hidden;
+    background-color: #f9f9ff;
+    padding-bottom: 80px;
+  }
+
+  /* Decorative elements */
+  .decoration {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .bubble-1 {
+    width: 80px;
+    height: 80px;
+    background: rgba(65, 34, 142, 0.1);
+    border-radius: 50%;
+    top: 10%;
+    left: 5%;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .bubble-2 {
+    width: 50px;
+    height: 50px;
+    background: rgba(253, 177, 87, 0.15);
+    border-radius: 50%;
+    top: 20%;
+    right: 10%;
+    animation: float 6s ease-in-out infinite 1s;
+  }
+
+  .bubble-3 {
+    width: 100px;
+    height: 100px;
+    background: rgba(189, 236, 246, 0.2);
+    border-radius: 50%;
+    bottom: 15%;
+    left: 15%;
+    animation: float 10s ease-in-out infinite 2s;
+  }
+
+  .bubble-4 {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 188, 170, 0.15);
+    border-radius: 50%;
+    bottom: 10%;
+    right: 5%;
+    animation: float 7s ease-in-out infinite 0.5s;
+  }
+
+  .bubble-5 {
+    width: 40px;
+    height: 40px;
+    background: rgba(65, 34, 142, 0.08);
+    border-radius: 50%;
+    top: 40%;
+    left: 20%;
+    animation: float 9s ease-in-out infinite 1.5s;
+  }
+
+  .bubble-6 {
+    width: 70px;
+    height: 70px;
+    background: rgba(253, 177, 87, 0.1);
+    border-radius: 50%;
+    top: 30%;
+    right: 20%;
+    animation: float 8s ease-in-out infinite 2.5s;
+  }
+
+  .star-1 {
+    width: 30px;
+    height: 30px;
+    background: rgba(65, 34, 142, 0.1);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    top: 15%;
+    left: 30%;
+    animation: spin 15s linear infinite;
+  }
+
+  .star-2 {
+    width: 20px;
+    height: 20px;
+    background: rgba(253, 177, 87, 0.15);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    bottom: 25%;
+    right: 30%;
+    animation: spin 12s linear infinite reverse;
+  }
+
+  .star-3 {
+    width: 25px;
+    height: 25px;
+    background: rgba(189, 236, 246, 0.2);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    top: 50%;
+    right: 15%;
+    animation: spin 18s linear infinite;
+  }
+
+  .heart-1 {
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 188, 170, 0.15);
+    position: absolute;
+    transform: rotate(-45deg);
+    top: 60%;
+    left: 10%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .heart-1:before,
+  .heart-1:after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 188, 170, 0.15);
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  .heart-1:before {
+    top: -15px;
+    left: 0;
+  }
+
+  .heart-1:after {
+    top: 0;
+    left: 15px;
+  }
+
+  .heart-2 {
+    width: 20px;
+    height: 20px;
+    background: rgba(65, 34, 142, 0.08);
+    position: absolute;
+    transform: rotate(-45deg);
+    bottom: 30%;
+    right: 20%;
+    animation: pulse 2s ease-in-out infinite 1s;
+  }
+
+  .heart-2:before,
+  .heart-2:after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: rgba(65, 34, 142, 0.08);
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  .heart-2:before {
+    top: -10px;
+    left: 0;
+  }
+
+  .heart-2:after {
+    top: 0;
+    left: 10px;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: rotate(-45deg) scale(1);
+    }
+    50% {
+      transform: rotate(-45deg) scale(1.1);
+    }
+  }
+
+  /* Gallery grid styling */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 25px;
+    margin: 40px 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: var(--delay);
+    transform-origin: center;
+  }
+
+  .gallery-item-inner {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: translateY(0);
+  }
+
+  .gallery-item:hover .gallery-item-inner {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .gallery-item::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    border-radius: 16px;
+    background: linear-gradient(45deg,
+      var(--color-1, #fdb157),
+      var(--color-2, #9473e6),
+      var(--color-3, #bdecf6),
+      var(--color-4, #ffbcaa),
+      var(--color-5, #41228e));
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  .gallery-item:nth-child(5n+1)::before { --color-1: #fdb157; --color-5: #9473e6; }
+  .gallery-item:nth-child(5n+2)::before { --color-1: #9473e6; --color-5: #bdecf6; }
+  .gallery-item:nth-child(5n+3)::before { --color-1: #bdecf6; --color-5: #ffbcaa; }
+  .gallery-item:nth-child(5n+4)::before { --color-1: #ffbcaa; --color-5: #41228e; }
+  .gallery-item:nth-child(5n+5)::before { --color-1: #41228e; --color-5: #fdb157; }
+
+  .gallery-item:hover::before {
+    opacity: 1;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    transition: transform 0.5s ease;
+    display: block;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.08);
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-gap: 20px;
+    }
+
+    .decoration {
+      transform: scale(0.7);
+    }
+  }
+</style>
+
+{{ end }}

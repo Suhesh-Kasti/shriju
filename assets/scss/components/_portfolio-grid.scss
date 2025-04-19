@@ -1,0 +1,398 @@
+// Portfolio Grid Styling
+
+// Portfolio Grid
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 25px;
+  margin-bottom: 40px;
+
+  @include desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+  }
+
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+
+      .portfolio-image img {
+        transform: scale(1.05);
+      }
+
+      .hover-overlay {
+        opacity: 1;
+      }
+    }
+
+    .portfolio-item-link {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .portfolio-image {
+      position: relative;
+      overflow: hidden;
+      padding-top: 75%; // Default aspect ratio (4:3)
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+    }
+
+    .hover-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba($color-primary, 0.85), rgba($color-secondary, 0.85));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+
+      .hover-content {
+        text-align: center;
+        padding: 25px;
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+        width: 100%;
+
+        .project-title {
+          color: $white;
+          margin-bottom: 8px;
+          font-size: 1.25rem;
+          font-weight: 600;
+        }
+
+        .project-category {
+          color: rgba($white, 0.85);
+          margin-bottom: 15px;
+          font-size: 0.9rem;
+          text-transform: capitalize;
+        }
+
+        .btn {
+          background: $white;
+          color: $color-primary;
+          border: none;
+          padding: 8px 20px;
+          border-radius: 30px;
+          font-weight: 500;
+          text-transform: capitalize;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+          display: inline-block;
+          margin-top: 5px;
+
+          &:hover {
+            background: $color-secondary;
+            color: $white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+          }
+        }
+      }
+
+      &:hover .hover-content {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+// Category Filter Styling
+.portfolio-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 40px;
+  gap: 10px;
+
+  .filter-item {
+    padding: 10px 25px;
+    border-radius: 30px;
+    background: rgba($color-primary, 0.1);
+    color: $text-dark;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, $color-primary, $color-secondary);
+      z-index: -1;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    &:hover {
+      color: $white;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba($color-primary, 0.3);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &.active {
+      background: linear-gradient(45deg, $color-primary, $color-secondary);
+      color: $white;
+      box-shadow: 0 5px 15px rgba($color-primary, 0.3);
+    }
+  }
+
+  @include mobile {
+    flex-direction: column;
+    align-items: center;
+
+    .filter-item {
+      width: 80%;
+      text-align: center;
+      margin-bottom: 5px;
+      padding: 8px 15px;
+    }
+  }
+}
+
+// Bottom Filter Styling
+.portfolio-filter-bottom {
+  margin: 40px 0 20px;
+  background: rgba($color-primary, 0.05);
+  padding: 15px 20px;
+  border-radius: 10px;
+  text-align: center;
+
+  .filter-label {
+    font-weight: 600;
+    color: $color-primary;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 0.95rem;
+  }
+
+  .filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .filter-item {
+    padding: 6px 15px;
+    border-radius: 20px;
+    background: $white;
+    color: $text-dark;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, $color-primary, $color-secondary);
+      z-index: -1;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    &:hover {
+      color: $white;
+      transform: translateY(-2px);
+      box-shadow: 0 3px 10px rgba($color-primary, 0.2);
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &.active {
+      background: linear-gradient(45deg, $color-primary, $color-secondary);
+      color: $white;
+      box-shadow: 0 3px 10px rgba($color-primary, 0.2);
+    }
+  }
+
+  @include mobile {
+    padding: 12px 15px;
+
+    .filter-label {
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    .filter-buttons {
+      justify-content: center;
+    }
+
+    .filter-item {
+      padding: 5px 12px;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+// Animation for portfolio items
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.portfolio-item {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+
+  @for $i from 1 through 20 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}
+
+// Gallery styling for single portfolio page
+.portfolio-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 15px;
+  margin: 30px 0;
+
+  .gallery-item {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+      img {
+        transform: scale(1.05);
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+  }
+}
+
+// Cute decorative elements
+.portfolio-decoration {
+  position: absolute;
+  z-index: -1;
+
+  &.bubble-1 {
+    width: 50px;
+    height: 50px;
+    background: rgba($color-primary, 0.2);
+    border-radius: 50%;
+    top: 10%;
+    left: 5%;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  &.bubble-2 {
+    width: 30px;
+    height: 30px;
+    background: rgba($color-secondary, 0.2);
+    border-radius: 50%;
+    top: 20%;
+    right: 10%;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  &.bubble-3 {
+    width: 70px;
+    height: 70px;
+    background: rgba($color-primary, 0.1);
+    border-radius: 50%;
+    bottom: 15%;
+    left: 15%;
+    animation: float 7s ease-in-out infinite;
+  }
+
+  &.bubble-4 {
+    width: 40px;
+    height: 40px;
+    background: rgba($color-secondary, 0.1);
+    border-radius: 50%;
+    bottom: 10%;
+    right: 5%;
+    animation: float 5s ease-in-out infinite;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

@@ -63,7 +63,7 @@
         }
       }
     }
-    
+
     // Display search query
     var urlParams = new URLSearchParams(window.location.search);
     var searchQuery = urlParams.get('q');
@@ -89,7 +89,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- bg shapes -->
   {{ partial "image.html" (dict "Src" "images/backgrounds/map.png" "Alt" "map" "Class" `bg-map`) }}
   {{ partial "image.html" (dict "Src" "images/illustrations/dots-group-v.svg" "Alt" "map" "Class" `bg-shape-1`) }}
@@ -104,43 +104,74 @@ document.addEventListener('DOMContentLoaded', function() {
   var urlParams = new URLSearchParams(window.location.search);
   var searchQuery = urlParams.get('q');
   var searchResults = document.getElementById('search-results');
-  
+
   if (!searchQuery) {
     searchResults.innerHTML = '<div class="text-center"><p>No search query provided. Please enter a search term.</p></div>';
     return;
   }
-  
+
   // Simulate search results (in a real implementation, you would use a search API)
   setTimeout(function() {
     var results = [];
-    
-    // Loop through all pages to find matches (this is a simplified example)
-    {{ range where .Site.RegularPages "Section" "blog" }}
-    if ("{{ .Title | lower }}".includes(searchQuery.toLowerCase()) || 
-        "{{ .Content | plainify | lower }}".includes(searchQuery.toLowerCase())) {
+
+    // Loop through blog, portfolio, and TIL pages to find matches
+    {{ range .Site.RegularPages }}
+    {{ if or (eq .Section "blog") (eq .Section "portfolio") (eq .Section "til") }}
+    if ("{{ .Title | lower }}".includes(searchQuery.toLowerCase()) ||
+        "{{ .Content | plainify | lower }}".includes(searchQuery.toLowerCase()) ||
+        "{{ range .Params.categories }}{{ . | lower }} {{ end }}".includes(searchQuery.toLowerCase()) ||
+        "{{ range .Params.tags }}{{ . | lower }} {{ end }}".includes(searchQuery.toLowerCase())) {
       results.push({
         title: "{{ .Title }}",
         url: "{{ .Permalink }}",
         date: "{{ .Date.Format "Jan 02, 2006" }}",
-        summary: "{{ .Summary | plainify | truncate 150 }}"
+        summary: "{{ .Summary | plainify | truncate 150 }}",
+        section: "{{ .Section }}"
       });
     }
     {{ end }}
-    
+    {{ end }}
+
     if (results.length > 0) {
       var resultsHTML = '<div class="search-results-count mb-4">' + results.length + ' results found</div>';
-      
+
       results.forEach(function(result) {
+        // Set icon and badge based on section
+        var sectionIcon, sectionBadge, sectionClass;
+
+        switch(result.section) {
+          case 'blog':
+            sectionIcon = 'ti-pencil-alt';
+            sectionBadge = 'Blog';
+            sectionClass = 'badge-primary';
+            break;
+          case 'portfolio':
+            sectionIcon = 'ti-briefcase';
+            sectionBadge = 'Portfolio';
+            sectionClass = 'badge-secondary';
+            break;
+          case 'til':
+            sectionIcon = 'ti-light-bulb';
+            sectionBadge = 'Today I Learned';
+            sectionClass = 'badge-info';
+            break;
+          default:
+            sectionIcon = 'ti-file';
+            sectionBadge = 'Page';
+            sectionClass = 'badge-dark';
+        }
+
         resultsHTML += '<div class="search-result-item" data-aos="fade-up">' +
+          '<div class="search-result-badge"><span class="badge ' + sectionClass + '"><i class="' + sectionIcon + '"></i> ' + sectionBadge + '</span></div>' +
           '<h3><a href="' + result.url + '">' + result.title + '</a></h3>' +
           '<div class="search-result-meta"><i class="ti-calendar"></i> ' + result.date + '</div>' +
           '<p class="search-result-summary">' + result.summary + '</p>' +
           '<a href="' + result.url + '" class="btn btn-sm btn-primary">Read More</a>' +
           '</div>';
       });
-      
+
       searchResults.innerHTML = resultsHTML;
-      
+
       // Initialize AOS
       if (typeof AOS !== 'undefined') {
         AOS.refresh();
@@ -204,6 +235,41 @@ document.addEventListener('DOMContentLoaded', function() {
   font-size: 1.1rem;
   font-weight: 600;
   color: #41228e;
+}
+
+.search-result-badge {
+  margin-bottom: 10px;
+}
+
+.search-result-badge .badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.search-result-badge .badge i {
+  margin-right: 5px;
+}
+
+.badge-primary {
+  background-color: #41228e;
+  color: white;
+}
+
+.badge-secondary {
+  background-color: #fdb157;
+  color: white;
+}
+
+.badge-info {
+  background-color: #bdecf6;
+  color: #333;
+}
+
+.badge-dark {
+  background-color: #333;
+  color: white;
 }
 </style>
 

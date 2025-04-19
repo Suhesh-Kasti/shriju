@@ -1,26 +1,46 @@
 {{ define "main" }}
 
-<section class="page-404 section bg-primary position-relative overflow-hidden">
+<section class="page-404 section position-relative overflow-hidden">
   <div class="container">
     <div class="row">
       <div class="col-lg-10 mx-auto">
         <div class="error-content text-center" data-aos="fade-up">
-          <div class="error-character">
-            <div class="error-face">
-              <div class="error-eyes">
-                <div class="error-eye left"></div>
-                <div class="error-eye right"></div>
+          <!-- Melting Ice Cream 404 -->
+          <div class="melting-icecream">
+            <div class="icecream-cone"></div>
+            <div class="icecream-scoop scoop-1" data-aos="fade-down" data-aos-delay="200"></div>
+            <div class="icecream-scoop scoop-2" data-aos="fade-down" data-aos-delay="400"></div>
+            <div class="icecream-scoop scoop-4" data-aos="fade-down" data-aos-delay="600"></div>
+            <div class="icecream-face">
+              <div class="icecream-eyes">
+                <div class="icecream-eye left"></div>
+                <div class="icecream-eye right"></div>
               </div>
-              <div class="error-mouth sad"></div>
+              <div class="icecream-mouth"></div>
             </div>
-            <div class="error-number">404</div>
-            <div class="error-shadow"></div>
+            <div class="melting-drops">
+              <div class="drop drop-1"></div>
+              <div class="drop drop-2"></div>
+              <div class="drop drop-3"></div>
+              <div class="drop drop-4"></div>
+              <div class="drop drop-5"></div>
+              <div class="puddle"></div>
+            </div>
+            <div class="error-text">404</div>
           </div>
-          <h2 class="mb-4 text-white">Oops! Page Not Found</h2>
-          <p class="mb-5 text-white">The page you're looking for seems to have gone on vacation. Maybe it's sipping cocktails on a beach somewhere?</p>
+
+          <h2 class="mb-4 error-title">Oh No! Your Page Melted Away!</h2>
+          <p class="mb-5 error-description">Looks like this page has melted faster than ice cream on a hot summer day! Don't worry, we've got plenty of other sweet pages for you to enjoy.</p>
+
           <div class="error-actions">
-            <a href="{{ site.BaseURL | relLangURL }}" class="btn btn-light"><i class="ti-home mr-2"></i>Go Home</a>
-            <a href="javascript:history.back()" class="btn btn-outline-light ml-3"><i class="ti-back-left mr-2"></i>Go Back</a>
+            <a href="{{ site.BaseURL | relLangURL }}" class="btn btn-primary"><i class="ti-home mr-2"></i>Back to the Freezer</a>
+            <a href="javascript:history.back()" class="btn btn-outline-primary ml-3"><i class="ti-back-left mr-2"></i>Oops, Go Back</a>
+          </div>
+
+          <!-- Fun 404 Facts -->
+          <div class="error-facts mt-5" data-aos="fade-up" data-aos-delay="800">
+            <h4>Fun Fact:</h4>
+            <p id="random-fact">The average person will spend 6 months of their life waiting for red lights to turn green.</p>
           </div>
         </div>
       </div>
@@ -29,12 +49,15 @@
 
   <!-- Floating elements -->
   <div class="error-floating-elements">
-    <div class="floating-element e1">❤️</div>
-    <div class="floating-element e2">🙈</div>
-    <div class="floating-element e3">🦄</div>
-    <div class="floating-element e4">🌈</div>
-    <div class="floating-element e5">🍦</div>
-    <div class="floating-element e6">🎈</div>
+    <div class="floating-element e1">🍦</div>
+    <div class="floating-element e2">🍨</div>
+    <div class="floating-element e3">🧁</div>
+    <div class="floating-element e4">🍭</div>
+    <div class="floating-element e5">🍬</div>
+    <div class="floating-element e6">🍩</div>
+    <div class="floating-element e7">🍪</div>
+    <div class="floating-element e8">🧠</div>
+    <div class="floating-element e9">💭</div>
   </div>
 
   <!-- Decorative shapes -->
@@ -56,5 +79,425 @@
     </div>
   </div>
 </section>
+
+<!-- Random Fun Facts Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const funFacts = [
+      "The average person will spend 6 months of their life waiting for red lights to turn green.",
+      "The 404 error is named after room 404 at CERN, where the World Wide Web was developed. The room contained the first web servers, and when a page wasn't found, it was said that it was 'in room 404'.",
+      "If you were to print the entire internet, you would need approximately 136 billion pieces of standard 8x11 paper.",
+      "The first website is still online! You can visit it at info.cern.ch.",
+      "Websites load slower when you're hungry. Ok, that's not true, but you should probably get a snack anyway.",
+      "The most common password is '123456'. Please don't use that one.",
+      "The term 'bug' to describe computer glitches originated when a moth got trapped in a Harvard computer in 1947.",
+      "In 1999, the founders of Google tried to sell their company to Excite for just $1 million, but Excite turned them down.",
+      "The first computer mouse was made of wood.",
+      "The world's first website went live on August 6, 1991. It was about the World Wide Web project itself.",
+      "The first email was sent by Ray Tomlinson in 1971. The message was 'QWERTYUIOP'.",
+      "The most expensive domain name ever sold was Cars.com for $872 million.",
+      "The first banner ad appeared on HotWired.com in 1994 and had a 44% click-through rate. Today's average is 0.05%.",
+      "About 20% of all websites are never visited by anyone except their creator and web crawlers.",
+      "The Space Jam website from 1996 is still active and unchanged."
+    ];
+
+    // Get random fact
+    const factElement = document.getElementById('random-fact');
+    factElement.textContent = funFacts[Math.floor(Math.random() * funFacts.length)];
+
+    // Change fact on click
+    factElement.addEventListener('click', function() {
+      let newFact;
+      do {
+        newFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+      } while (newFact === factElement.textContent);
+
+      factElement.textContent = newFact;
+    });
+  });
+</script>
+
+<!-- Add custom CSS for the 404 page -->
+<style>
+  .page-404 {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+    padding: 100px 0;
+  }
+
+  .error-title {
+    color: #41228e;
+    font-weight: 700;
+    margin-top: 30px;
+  }
+
+  .error-description {
+    color: #555;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Melting Ice Cream Styling */
+  .melting-icecream {
+    position: relative;
+    width: 200px;
+    height: 300px;
+    margin: 0 auto 30px;
+  }
+
+  .icecream-cone {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 120px;
+    background: linear-gradient(135deg, #f9d4a7 0%, #d4a76a 100%);
+    clip-path: polygon(0% 30%, 100% 30%, 50% 100%);
+    z-index: 2;
+  }
+
+  .icecream-scoop {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+
+  .scoop-1 {
+    bottom: 90px;
+    background: linear-gradient(135deg, #ff9fb0 0%, #ff6b8b 100%);
+    animation: melt 3s ease-in-out infinite;
+  }
+
+  .scoop-2 {
+    bottom: 150px;
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #a5d8ff 0%, #5fb8ff 100%);
+    animation: melt 3s ease-in-out 0.5s infinite;
+  }
+
+  .scoop-4 {
+    bottom: 200px;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ffcf5c 0%, #fdb157 100%);
+    animation: melt 3s ease-in-out 1s infinite;
+  }
+
+  .icecream-face {
+    position: absolute;
+    bottom: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 40px;
+    z-index: 4;
+  }
+
+  .icecream-eyes {
+    display: flex;
+    justify-content: space-between;
+    width: 40px;
+    margin: 0 auto;
+  }
+
+  .icecream-eye {
+    width: 10px;
+    height: 10px;
+    background: #333;
+    border-radius: 50%;
+    position: relative;
+    animation: blink 3s ease-in-out infinite;
+  }
+
+  .icecream-eye::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -2px;
+    width: 14px;
+    height: 5px;
+    background: #fff;
+    border-radius: 5px 5px 0 0;
+    animation: eyebrow 3s ease-in-out infinite;
+  }
+
+  .icecream-mouth {
+    width: 20px;
+    height: 10px;
+    border-radius: 0 0 10px 10px;
+    border: 3px solid #333;
+    border-top: none;
+    margin: 10px auto 0;
+    position: relative;
+    animation: mouth 3s ease-in-out infinite;
+  }
+
+  .melting-drops {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .drop {
+    position: absolute;
+    background: #ff9fb0;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity: 0;
+  }
+
+  .drop-1 {
+    width: 15px;
+    height: 20px;
+    left: 40%;
+    top: 40%;
+    background: #ff9fb0;
+    animation: drip 3s ease-in-out 0.5s infinite;
+  }
+
+  .drop-2 {
+    width: 12px;
+    height: 18px;
+    left: 60%;
+    top: 50%;
+    background: #a5d8ff;
+    animation: drip 3s ease-in-out 1s infinite;
+  }
+
+  .drop-3 {
+    width: 10px;
+    height: 15px;
+    left: 55%;
+    top: 60%;
+    background: #ffcf5c;
+    animation: drip 3s ease-in-out 1.5s infinite;
+  }
+
+  .drop-4 {
+    width: 8px;
+    height: 12px;
+    left: 45%;
+    top: 70%;
+    background: #ff9fb0;
+    animation: drip 3s ease-in-out 2s infinite;
+  }
+
+  .drop-5 {
+    width: 10px;
+    height: 15px;
+    left: 50%;
+    top: 65%;
+    background: #a5d8ff;
+    animation: drip 3s ease-in-out 2.5s infinite;
+  }
+
+  .puddle {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 20px;
+    background: linear-gradient(to right,
+      rgba(255, 159, 176, 0.7),
+      rgba(165, 216, 255, 0.7),
+      rgba(255, 207, 92, 0.7));
+    border-radius: 50%;
+    filter: blur(5px);
+    opacity: 0.7;
+    animation: puddle 3s ease-in-out infinite;
+  }
+
+  .error-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 120px;
+    font-weight: 900;
+    color: rgba(65, 34, 142, 0.15);
+    z-index: 0;
+    letter-spacing: 5px;
+  }
+
+  /* Animations */
+  @keyframes melt {
+    0%, 100% {
+      border-radius: 50%;
+      transform: translateX(-50%) scale(1);
+    }
+    50% {
+      border-radius: 40% 40% 50% 50% / 30% 30% 70% 70%;
+      transform: translateX(-50%) scale(0.95) translateY(5px);
+    }
+  }
+
+  @keyframes drip {
+    0%, 100% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    50%, 70% {
+      opacity: 0.7;
+      transform: translateY(50px);
+    }
+    90% {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+  }
+
+  @keyframes puddle {
+    0%, 100% {
+      transform: translateX(-50%) scale(1);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateX(-50%) scale(1.1);
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes blink {
+    0%, 45%, 55%, 100% {
+      transform: scaleY(1);
+    }
+    50% {
+      transform: scaleY(0.1);
+    }
+  }
+
+  @keyframes eyebrow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    30%, 70% {
+      transform: translateY(-2px);
+    }
+  }
+
+  @keyframes mouth {
+    0%, 100% {
+      border-radius: 0 0 10px 10px;
+      height: 10px;
+      transform: translateY(0);
+    }
+    30%, 70% {
+      border-radius: 10px 10px 0 0;
+      height: 8px;
+      transform: translateY(2px);
+    }
+  }
+
+  /* Floating Elements Animation */
+  .error-floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .floating-element {
+    position: absolute;
+    font-size: 2rem;
+    animation: float 15s linear infinite;
+    opacity: 0.7;
+  }
+
+  .e1 { top: 10%; left: 10%; animation-duration: 20s; }
+  .e2 { top: 20%; left: 80%; animation-duration: 18s; animation-delay: 1s; }
+  .e3 { top: 80%; left: 15%; animation-duration: 25s; animation-delay: 2s; }
+  .e4 { top: 40%; left: 90%; animation-duration: 22s; animation-delay: 3s; }
+  .e5 { top: 70%; left: 80%; animation-duration: 19s; animation-delay: 4s; }
+  .e6 { top: 30%; left: 5%; animation-duration: 21s; animation-delay: 5s; }
+  .e7 { top: 90%; left: 50%; animation-duration: 23s; animation-delay: 6s; }
+  .e8 { top: 15%; left: 60%; animation-duration: 24s; animation-delay: 7s; }
+  .e9 { top: 50%; left: 30%; animation-duration: 26s; animation-delay: 8s; }
+
+  @keyframes float {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(50px, 50px) rotate(90deg);
+    }
+    50% {
+      transform: translate(0, 100px) rotate(180deg);
+    }
+    75% {
+      transform: translate(-50px, 50px) rotate(270deg);
+    }
+    100% {
+      transform: translate(0, 0) rotate(360deg);
+    }
+  }
+
+  /* Fun Facts Styling */
+  .error-facts {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 40px auto 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .error-facts h4 {
+    color: #41228e;
+    margin-bottom: 10px;
+  }
+
+  #random-fact {
+    color: #555;
+    font-style: italic;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #random-fact:hover {
+    color: #41228e;
+  }
+
+  #random-fact::after {
+    content: " (Click for another fun fact!)";
+    font-size: 0.8em;
+    color: #fdb157;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .melting-icecream {
+      transform: scale(0.8);
+    }
+
+    .error-text {
+      font-size: 100px;
+    }
+
+    .error-facts {
+      padding: 15px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .melting-icecream {
+      transform: scale(0.7);
+    }
+
+    .error-text {
+      font-size: 80px;
+    }
+  }
+</style>
 
 {{ end }}

@@ -3,11 +3,11 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h2 class="section-title">Contact Info</h2>
+        <h2 class="section-title">🎁 Have something for me?</h2>
       </div>
       <div class="col-lg-8 mx-auto">
         <div class="bg-white rounded text-center p-5 shadow-down">
-          <h3 class="h4 mb-80">Contact Form</h3>
+          <h3 class="h4 mb-80">Fill this to magically teleport it to my inbox 🤪</h3>
           <form action="{{site.Params.contact_form_action}}" method="POST" class="row">
             <div class="col-md-6">
               <input type="text" id="name" name="name" placeholder="Full Name" class="form-control px-0 mb-4">
@@ -35,17 +35,22 @@
   <div class="section">
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3 text-center mb-4 mb-md-0">
+          <a href="{{ site.Params.footer_logo_link | default site.BaseURL }}" class="footer-logo">
+            {{ partial "logo.html" . }}
+          </a>
+        </div>
+        <div class="col-md-3">
           <h4 class="h5 text-light">Email</h4>
           <p class="fs-6 font-secondary"><a class="text-white"
               href="mailto:{{site.Params.contact_info.email}}">{{site.Params.contact_info.email}}</a></p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <h4 class="h5 text-light">Phone</h4>
           <p class="fs-6 font-secondary"><a class="text-white"
               href="tel:{{site.Params.contact_info.mobile}}">{{site.Params.contact_info.mobile}}</a></p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <h4 class="h5 text-light">Address</h4>
           <p class="text-white fs-6 font-secondary">{{site.Params.contact_info.address}}</p>
         </div>

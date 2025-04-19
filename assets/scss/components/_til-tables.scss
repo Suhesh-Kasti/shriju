@@ -1,0 +1,114 @@
+// TIL Tables Styling
+
+.til-single-content {
+  // Table styling
+  table {
+    width: 100%;
+    margin: 1.5rem 0;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    
+    // Make tables responsive
+    @media (max-width: 767px) {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    // Table header
+    thead {
+      background: linear-gradient(45deg, rgba($color-primary, 0.8), rgba($color-secondary, 0.8));
+      
+      th {
+        color: $white;
+        font-weight: 600;
+        text-align: left;
+        padding: 12px 15px;
+        border: none;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        
+        &:not(:last-child) {
+          border-right: 1px solid rgba($white, 0.2);
+        }
+      }
+    }
+    
+    // Table body
+    tbody {
+      tr {
+        &:nth-child(odd) {
+          background-color: $white;
+        }
+        
+        &:nth-child(even) {
+          background-color: rgba($color-primary, 0.05);
+        }
+        
+        &:hover {
+          background-color: rgba($color-primary, 0.1);
+        }
+      }
+      
+      td {
+        padding: 12px 15px;
+        border: 1px solid $border-color;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        vertical-align: middle;
+        
+        // Code inside tables
+        code {
+          background-color: rgba($color-primary, 0.1);
+          padding: 2px 5px;
+          border-radius: 3px;
+          font-size: 0.9em;
+          color: $color-primary;
+        }
+      }
+    }
+  }
+  
+  // Code blocks
+  pre {
+    margin: 1.5rem 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid $border-color;
+    
+    code {
+      padding: 0;
+      background-color: transparent;
+      color: $text-dark;
+    }
+  }
+  
+  // Inline code
+  p code {
+    background-color: rgba($color-primary, 0.1);
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    color: $color-primary;
+  }
+  
+  // Blockquotes
+  blockquote {
+    margin: 1.5rem 0;
+    padding: 15px 20px;
+    background-color: rgba($color-secondary, 0.1);
+    border-left: 4px solid $color-secondary;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    
+    p {
+      margin-bottom: 0;
+      color: rgba($text-dark, 0.8);
+    }
+  }
+}

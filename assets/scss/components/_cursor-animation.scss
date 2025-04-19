@@ -1,0 +1,342 @@
+// Custom Cursor Animation
+// Only visible on desktop devices
+
+// Hide default cursor on desktop
+@media (min-width: 992px) {
+  body {
+    cursor: none;
+
+    a,
+    button,
+    input,
+    textarea,
+    select,
+    .btn,
+    .nav-link,
+    .portfolio-item,
+    .gallery-item,
+    .filter-item,
+    .social-icons a,
+    .navbar-toggler {
+      cursor: none;
+    }
+  }
+
+  // Ice cream cursor
+  .cursor-icecream {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+
+    // Ice cream scoop container
+    .icecream-scoop {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      background: linear-gradient(135deg, #ff9fb0 0%, #ff6b8b 100%);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transform-origin: bottom center;
+      animation: wobble 3s ease-in-out infinite;
+      z-index: 9999;
+
+      // Ice cream texture
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background-image:
+          radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 2px, transparent 2px),
+          radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 2px, transparent 2px),
+          radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 2px, transparent 2px);
+        opacity: 0.7;
+      }
+    }
+
+    // Ice cream cone
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 28px;
+      background: linear-gradient(135deg, #f9d4a7 0%, #d4a76a 100%);
+      clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+      z-index: 9998;
+
+      // Waffle texture
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+          linear-gradient(45deg, transparent 65%, rgba(0, 0, 0, 0.1) 65%, transparent 80%),
+          linear-gradient(-45deg, transparent 65%, rgba(0, 0, 0, 0.1) 65%, transparent 80%);
+        background-size: 6px 6px;
+        clip-path: inherit;
+      }
+    }
+
+      // Sprinkles
+      .sprinkles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        pointer-events: none;
+        z-index: 2;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: inherit;
+          background-image:
+            radial-gradient(circle at 30% 20%, #fff 0%, #fff 1.5px, transparent 1.5px),
+            radial-gradient(circle at 70% 30%, #41228e 0%, #41228e 1.5px, transparent 1.5px),
+            radial-gradient(circle at 40% 50%, #fdb157 0%, #fdb157 1.5px, transparent 1.5px),
+            radial-gradient(circle at 60% 70%, #a5d8ff 0%, #a5d8ff 1.5px, transparent 1.5px),
+            radial-gradient(circle at 80% 40%, #ffcf5c 0%, #ffcf5c 1.5px, transparent 1.5px);
+        }
+      }
+
+      // Cherry on top
+      .cherry {
+        position: absolute;
+        top: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 8px;
+        background: linear-gradient(135deg, #ff5252 0%, #d10000 100%);
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        z-index: 3;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: -5px;
+          left: 50%;
+          width: 3px;
+          height: 6px;
+          background: linear-gradient(to right, #7d4d1d, #a67c52);
+          border-radius: 3px;
+          transform: translateX(-50%) rotate(5deg);
+        }
+      }
+
+      // Drip effect
+      .drip {
+        position: absolute;
+        bottom: -3px;
+        width: 8px;
+        height: 10px;
+        background: inherit;
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        opacity: 0;
+        z-index: 1;
+      }
+
+      .drip-1 {
+        left: 30%;
+        transform: rotate(15deg);
+        animation: drip 5s ease-in-out infinite;
+      }
+
+      .drip-2 {
+        left: 60%;
+        width: 6px;
+        height: 8px;
+        animation: drip 5s ease-in-out 2.5s infinite;
+        transform: rotate(-10deg);
+      }
+    }
+
+  // Outer cursor glow
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50px; // Larger size as requested
+    height: 50px;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.8;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    mix-blend-mode: overlay; // Better visibility on all backgrounds
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+  }
+
+  // Cursor states
+  .cursor-hover {
+    width: 70px;
+    height: 70px;
+    background: radial-gradient(circle, rgba(253,177,87,0.4) 0%, rgba(253,177,87,0) 70%);
+
+    .icecream-scoop {
+      transform: scale(1.15);
+      animation: wobble 1.5s ease-in-out infinite;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+
+      // Change flavor on hover
+      background: linear-gradient(135deg, #a5d8ff 0%, #5fb8ff 100%);
+    }
+
+    .cherry {
+      transform: translateX(-50%) scale(1.2);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+  }
+
+  .cursor-down {
+    width: 45px;
+    height: 45px;
+
+    .icecream-scoop {
+      transform: scale(0.92) translateY(2px);
+      animation: squish 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+      // Change flavor on click with transition
+      background: linear-gradient(135deg, #ffcf5c 0%, #fdb157 100%);
+      transition: background 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .cherry {
+      transform: translateX(-50%) scale(0.9) translateY(2px);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .drip-1, .drip-2 {
+      opacity: 0.7;
+      animation-duration: 1s;
+    }
+  }
+
+  // Cursor trail effect
+  .cursor-trail {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9997;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    animation: fadeOut 1.5s forwards;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
+    filter: blur(1px);
+  }
+
+  // Animations
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.4;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.2;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.4;
+    }
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 0.8;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.3);
+    }
+  }
+
+  @keyframes wobble {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-5deg);
+    }
+    75% {
+      transform: rotate(5deg);
+    }
+  }
+
+  @keyframes drip {
+    0%, 100% {
+      opacity: 0;
+      transform: translateY(0) rotate(15deg);
+    }
+    50%, 60% {
+      opacity: 1;
+      transform: translateY(5px) rotate(15deg);
+    }
+    80% {
+      opacity: 0;
+      transform: translateY(10px) rotate(15deg);
+    }
+  }
+
+  @keyframes squish {
+    0% {
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      transform: scale(1) rotate(0deg);
+    }
+    30% {
+      border-radius: 60% 60% 40% 40% / 40% 40% 60% 60%;
+      transform: scale(0.85) rotate(-5deg);
+    }
+    70% {
+      border-radius: 55% 55% 45% 45% / 45% 45% 55% 55%;
+      transform: scale(0.9) rotate(3deg);
+    }
+    100% {
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  // Cursor color variations for trails
+  .cursor-color-1 { background-image: radial-gradient(circle, rgba(65,34,142,0.8) 0%, rgba(65,34,142,0) 70%); }
+  .cursor-color-2 { background-image: radial-gradient(circle, rgba(253,177,87,0.8) 0%, rgba(253,177,87,0) 70%); }
+  .cursor-color-3 { background-image: radial-gradient(circle, rgba(255,159,176,0.8) 0%, rgba(255,159,176,0) 70%); }
+  .cursor-color-4 { background-image: radial-gradient(circle, rgba(165,216,255,0.8) 0%, rgba(165,216,255,0) 70%); }
+  .cursor-color-5 { background-image: radial-gradient(circle, rgba(255,207,92,0.8) 0%, rgba(255,207,92,0) 70%); }
+}

@@ -2,14 +2,14 @@
 # favicon
 favicon = "images/favicon.png"
 # logo
-logo = ""
+logo = "images/logo.png"
 # use `px` or `x` with logo_width, example: "100px".
 # Note: logo_width is not work with .svg file
-logo_width = "300px"
-# if logo_webp set false, will not generate WEBP version of logo | default is true
-logo_webp = true
+logo_width = "100px"
 # logo text will only show when logo is missing.
 logo_text = "Shriju"
+# footer logo link - where the logo in footer should link to
+footer_logo_link = "/"
 
 # purgeCSS
 purge_css = true
@@ -36,7 +36,7 @@ author_image_width = "700rem" # Width of the author image
 author_image_height = "auto" # Height of the author image (set to auto to maintain aspect ratio)
 
 # copyright
-copyright = "Copyrighted by Shrijana Khatiwada"
+copyright = "❤️ Copyright © 2025 |  Shrijana Khatiwada ❤️"
 theme_copyright = true
 
 # Preloader
@@ -47,8 +47,8 @@ preloader = "images/preloader.gif" # use jpg, png, svg or gif format.
 # contact info
 [contact_info]
 address = "Kathmandu, Nepal"
-email = "shrijana@shrijana.com"
-mobile = "+9779841234567"
+email = "shrijanakhatiwada88@gmail.com"
+mobile = "+977 986-3588150"
 
 # Crisp Chat
 [crisp_chat]
@@ -73,10 +73,10 @@ visitor = true
 
 # seo meta data for OpenGraph / Twitter Card
 [metadata]
-author = "Themefisher"
+author = "Shrijana"
 description = "This is meta description"
 image = "images/favicon.png" # this image will be used as fallback if a page has no image of its own
-keywords = ["Boilerplate", "Hugo", "Themefisher", "GetHugoThemes"]
+keywords = ["Shrijana", "Shriju", "Graphics Designer", "Shrijana Khatiwada", "Subisu", ""]
 
 # matomo tracking: see https://matomo.org/
 [matomo]
@@ -110,7 +110,7 @@ mastodon = "" # Your verification code
 # google map
 [google_map]
 enable = true
-embed_url = "https://www.google.com/maps/embed/v1/place?q=Washington+D.C.,+DC,+USA&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+embed_url = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d976.5922799222902!2d85.29139848609192!3d27.691346042296733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb186826577b39%3A0x7ec85736ac74bda!2sKuleshwor%20Awash%20Secondary%20School!5e0!3m2!1sen!2snp!4v1745045985395!5m2!1sen!2snp"
 
 # cookies
 [cookies]
