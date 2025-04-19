@@ -1,0 +1,77 @@
+// Hero Mobile Fix
+// Fixes the issue with the typing animation text and "I am Shrijana" text being obscured by the author image on mobile phones
+
+// Author image container
+.author-image-container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+
+  @include tablet {
+    right: -100px;
+    bottom: 0;
+    z-index: 0; // Lower z-index on tablet to prevent overlap
+  }
+
+  @include mobile {
+    // Adjusted in mobile-fixes.scss
+  }
+}
+
+// Typing effect container
+.typing-effect-container {
+  position: relative;
+  z-index: 2;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: $white;
+
+  @include mobile {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+
+  .typing-prefix {
+    font-weight: 400;
+  }
+
+  .typing-text {
+    font-weight: 700;
+  }
+
+  .typing-cursor {
+    font-weight: 700;
+    animation: blink 1s infinite;
+  }
+}
+
+// Hero area mobile adjustments
+.hero-area {
+  @include mobile {
+    padding: 50px 0;
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+  }
+}
+
+// Background text adjustment for mobile
+.bg-text-wrapper {
+  @include mobile {
+    display: none; // Hide background text on mobile
+  }
+}
+
+// Cursor blink animation
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}

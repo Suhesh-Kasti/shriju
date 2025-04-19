@@ -60,5 +60,7 @@ $font-icon: '{{.font_icon | default "Font Awesome 5 Free"}}';
 @import "components/pagination";
 @import "components/portfolio-grid";
 @import "components/cursor-animation";
+@import "components/hero-mobile-fix";
+@import "components/mobile-fixes";
 
 @import "custom";

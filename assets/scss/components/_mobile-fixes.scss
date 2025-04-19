@@ -1,0 +1,150 @@
+// Mobile fixes for various issues
+
+// Fix for hero section on mobile
+@media (max-width: 767px) {
+  .hero-area {
+    padding: 30px 0;
+
+    // Position author image
+    .author-image-container {
+      position: absolute;
+      right: -30px;
+      bottom: -20px;
+      z-index: 1;
+      opacity: 0.8;
+    }
+
+    // Remove any background from content container
+    .col-lg-8 {
+      background-color: transparent;
+      padding: 0;
+      box-shadow: none;
+      position: relative;
+      z-index: 10;
+    }
+
+    // Make heading text stand out with just shadow
+    h1 {
+      color: white !important;
+      font-weight: 700;
+      font-size: 28px;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 1), 0 0 20px rgba(0, 0, 0, 1), 0 0 30px rgba(0, 0, 0, 0.8);
+      position: relative;
+      z-index: 20;
+      display: block;
+    }
+
+    // Make typing text stand out with just shadow
+    .typing-effect-container {
+      color: white !important;
+      font-weight: 600;
+      margin: 15px 0;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 1), 0 0 20px rgba(0, 0, 0, 1), 0 0 30px rgba(0, 0, 0, 0.8);
+      position: relative;
+      z-index: 20;
+      display: block;
+    }
+
+    // Make CV button stand out
+    .cv-button-wrapper {
+      position: relative;
+      z-index: 20;
+      margin: 20px 0;
+
+      .cv-button {
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    // Make social icons stand out
+    .social-icons-inline {
+      position: relative;
+      z-index: 20;
+      margin-top: 15px;
+
+      li {
+        margin-right: 10px;
+      }
+
+      .social-link {
+        color: white;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
+        font-size: 1.2rem;
+      }
+    }
+
+    // Hide background text
+    .bg-text-wrapper {
+      display: none;
+    }
+
+    // Reduce opacity of decorative shapes
+    .hero-shapes {
+      opacity: 0.3;
+    }
+  }
+}
+
+// Fix for portfolio categories on mobile
+@media (max-width: 767px) {
+  // Make portfolio filter horizontal scrollable
+  .portfolio-filter {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Edge */
+    }
+
+    // Make filter items smaller
+    .filter-item {
+      flex: 0 0 auto;
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      margin-right: 5px;
+      white-space: nowrap;
+      min-width: auto;
+    }
+  }
+
+  // Portfolio filter at bottom of portfolio page
+  .portfolio-filter-bottom {
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 30px;
+
+    .filter-label {
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      display: block;
+    }
+
+    .filter-buttons {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding-bottom: 5px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .filter-item {
+      flex: 0 0 auto;
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      margin-right: 5px;
+      white-space: nowrap;
+      min-width: auto;
+    }
+  }
+}
